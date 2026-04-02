@@ -1,7 +1,7 @@
 @extends('layouts.web')
 
 @section('content')
-    <title>FocusZen | Reminders</title>
+    <title>Mentra | Reminders</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
     <section class="container sec">

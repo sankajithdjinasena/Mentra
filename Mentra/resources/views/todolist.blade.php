@@ -1,7 +1,7 @@
 @extends('layouts.web')
 
 @section('content')
-    <title>FocusZen | To Do List</title>
+    <title>Mentra | To Do List</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
     <section class="container sec  wow fadeInDown">

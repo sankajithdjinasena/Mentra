@@ -15,7 +15,7 @@
 
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger intent="WELCOME" chat-title="FocusZen" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
+    <df-messenger intent="WELCOME" chat-title="Mentra" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
         language-code="en"></df-messenger>
 
 
