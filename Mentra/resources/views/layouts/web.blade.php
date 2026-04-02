@@ -82,7 +82,7 @@
                             <li><a class="dropdown-item {{ request()->routeIs('community') ? 'active' : '' }}"
                                     href="{{ route('community') }}">Study community</a></li>
                             <li><a class="dropdown-item {{ request()->routeIs('music.index') ? 'active' : '' }}"
-                                    href="{{ route('music.index') }}">FocusZen Music</a></li>
+                                    href="{{ route('music.index') }}">Mentra Music</a></li>
                             {{-- <li><a class="dropdown-item {{ request()->routeIs('chatbot.index') ? 'active' : '' }}"
                                     href="{{ route('chatbot.index') }}">Chatbot</a></li> --}}
                             <li><a class="dropdown-item {{ request()->routeIs('youtube_video') ? 'active' : '' }}"
@@ -107,15 +107,15 @@
                 <ul class="d-flex navbar-nav right-ul" role="search">
                     <li class="nav-item">
                         @guest
-                            <a class="nav-link " href="{{ route('login') }}" title="Login to your FocusZen account">Login</a>
+                            <a class="nav-link " href="{{ route('login') }}" title="Login to your Mentra account">Login</a>
                         <li class="nav-item">
-                            <a class="nav-link reg-btn" href="{{ route('register') }}" title="Create a new FocusZen account">Register</a>
+                            <a class="nav-link reg-btn" href="{{ route('register') }}" title="Create a new Mentra account">Register</a>
                         </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link reg-btn" href="{{ route('register') }}">{{ Auth::user()->name }}</a>
                         </li>
-                        <a class="nav-link" style="font-weight: 800;font-size: 19px;color: black;" title="Logout From your FocusZen account"
+                        <a class="nav-link" style="font-weight: 800;font-size: 19px;color: black;" title="Logout From your Mentra account"
                             href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
@@ -143,7 +143,7 @@
 
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger intent="WELCOME" chat-title="FocusZen" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
+    <df-messenger intent="WELCOME" chat-title="Mentra" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
         language-code="en"></df-messenger>
 
 
@@ -153,7 +153,7 @@
 
             <div class="row pb-5 pt-5">
                 <div class="col-md-3">
-                    <img src="{{ asset('img/logo-footer.jpg') }}" alt="FocusZen Logo" class="img-fluid">
+                    <img src="{{ asset('img/logo-footer.jpg') }}" alt="Mentra Logo" class="img-fluid">
                     <h5 class="font-family-custom">Follow Us</h5>
                     <div class="d-flex justify-content-center">
                         <a href="https://facebook.com" class="text-light me-3"><i class="fa fa-facebook-official"
@@ -180,7 +180,7 @@
                 <div class="col-md-4">
                     <h5 class="font-family-custom">Contact</h5>
                     <ul class="list-unstyled footer_contact">
-                        <li><a href="mailto:contact@focuszen.com" class="text-light">contact@focuszen.com</a></li>
+                        <li><a href="mailto:contact@mentra.com" class="text-light">contact@mentra.com</a></li>
                         <li><a href="tel:+1234567890" class="text-light">+94 765536428</a></li>
                         <li>Kurunegala, Giriulla/Bopitiya</li>
                     </ul>
@@ -189,7 +189,7 @@
             <hr>
             <div class="row mt-1">
                 <div class="col all-right">
-                    <p class="font-family-custom">&copy; 2024 FocusZen. All Rights Reserved.</p>
+                    <p class="font-family-custom">&copy; 2024 Mentra. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

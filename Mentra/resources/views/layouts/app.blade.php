@@ -119,7 +119,7 @@
                             <li><a class="dropdown-item {{ request()->routeIs('community') ? 'active' : '' }}"
                                     href="{{ route('community') }}">Study community</a></li>
                             <li><a class="dropdown-item {{ request()->routeIs('music.index') ? 'active' : '' }}"
-                                    href="{{ route('music.index') }}">FocusZen Music</a></li>
+                                    href="{{ route('music.index') }}">Mentra Music</a></li>
                             {{-- <li><a class="dropdown-item {{ request()->routeIs('chatbot.index') ? 'active' : '' }}"
                                     href="{{ route('chatbot.index') }}">Chatbot</a></li> --}}
                             <li><a class="dropdown-item {{ request()->routeIs('youtube_video') ? 'active' : '' }}"
@@ -146,7 +146,7 @@
                             @guest
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             @else
-                                <a class="nav-link" href="{{ route('logout') }}" title="Logout From your FocusZen account"
+                                <a class="nav-link" href="{{ route('logout') }}" title="Logout From your Mentra account"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
