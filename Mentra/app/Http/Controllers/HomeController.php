@@ -37,6 +37,29 @@ class HomeController extends Controller
         $users = User::where('status', 1)->get();
         return view('admin.viewusers', compact('users'));
     }
+  
+        public function dash_top()
+    {
+        $topUsers = Study_info::select('user_id', DB::raw('SUM(hours) as total_hours'))
+            ->groupBy('user_id')
+            ->orderBy('total_hours', 'desc')
+            ->take(10)
+            ->with('user')
+            ->get();
+
+        return view('admin.topusers', compact('topUsers'));
+    }
+    public function dash_feedbacks()
+    {
+        $feedbacks = Feedback::latest()->get();
+        return view('admin.dashfeedback', compact('feedbacks'));
+    }
+
+    public function dash_challenge()
+    {
+        return view('admin.challenge');
+    }
+
 
 
     public function dashboard()

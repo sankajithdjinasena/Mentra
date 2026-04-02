@@ -20,11 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($users as $user)
                         <tr>
-                            <td>1234</td>
-                            <td>user</td>
-                            <td>user@example.com</td>
-                           <td>2026-04-01</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                           <td>{{ $user->created_at->format('Y-m-d') }}</td>
 
                             {{-- <td>
                                 <a href="#" class="btn btn-sm btn-warning">Edit</a>
@@ -37,6 +38,7 @@
                                 </form>
                             </td> --}}
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
