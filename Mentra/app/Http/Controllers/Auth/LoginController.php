@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,7 +25,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+
+     protected function redirectTo()
+    {
+        if (Auth::user()->status == 1) {
+            return '/home';
+        } elseif (Auth::user()->status == 2) {
+            return '/dashboard';
+        }
+
+        return '/';
+    }
 
     /**
      * Create a new controller instance.

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Focuzen | Admin DashBoard</title>
+    <title>Mentra | Admin DashBoard</title>
     <link rel="shortcut icon" href="{{ asset('system/images/logo.jpg') }}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
