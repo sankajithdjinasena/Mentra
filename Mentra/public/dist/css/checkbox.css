@@ -1,0 +1,37 @@
+.fancy-options {
+  margin-top: 1em;
+}
+.fancy-options input[type=radio] {
+  display: none;
+}
+.fancy-options input[type=radio] ~ label {
+  width: 100%;
+  padding: 0.5em;
+  font-weight: initial;
+  border-radius: 20px;
+  background: #616161;
+  padding: 6px 15px;
+}
+.fancy-options input[type=radio] ~ label:hover:after {
+  transform: scale(1.25);
+}
+.fancy-options input[type=radio] ~ label:after {
+  content: "";
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  float: right;
+  border: solid 2px #ffffff3d;
+  background-clip: content-box;
+  /* support: IE9+ */
+  border-radius: 50%;
+  transition: 0.3s;
+  padding: 0.5em;
+}
+.fancy-options input[type=radio]:checked ~ label {
+  background: rgb(235, 8, 8);
+}
+.fancy-options input[type=radio]:checked ~ label:after {
+  background-color: #ffffff;
+  padding: 0.3em;
+}
