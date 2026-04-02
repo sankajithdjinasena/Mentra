@@ -1,0 +1,57 @@
+body {
+    font-family: "Nunito", serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.container-fluid {
+    background-color: white;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background: #3f9610;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.btn-primary {
+    background: #3f9610;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.btn-primary:hover {
+    background: #3f9610;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.invalid-feedback {
+    color: red;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
