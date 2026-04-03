@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\List_todo;
+use App\Models\Study_info;
 use App\Models\Todolist;
 use Auth;
 use Illuminate\Http\Request;
@@ -19,7 +20,23 @@ class TodolistController extends Controller
             }])
             ->where('status', '1')
             ->get();
-        return view('todolist', compact('todolists', 'date'));
+
+
+             $userId = Auth::id();
+        $startOfMonth = now()->startOfMonth()->toDateString();
+        $endOfMonth = now()->endOfMonth()->toDateString();
+
+        $studyInfos = Study_info::where('user_id', $userId)
+            ->where('status', 1)
+            ->whereBetween('date', [$startOfMonth, $endOfMonth])
+            ->get()
+            ->keyBy('date');
+
+        $dates = collect();
+        for ($date = now()->startOfMonth(); $date <= now()->endOfMonth(); $date->addDay()) {
+            $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
+        }
+        return view('todolist', compact('todolists', 'date','dates'));
     }
 
     public function store(Request $request)
@@ -40,6 +57,8 @@ class TodolistController extends Controller
                 'todo' => $todo,
             ]);
         }
+
+
 
         return redirect()->route('todolist.index')->with('success', 'To-Do List created successfully!');
     }

@@ -28,7 +28,8 @@ class StudyInfoController extends Controller
             $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
         }
 
-        return view('studyinfo', compact('dates'));
+        // return view('studyinfo', compact('dates'));
+        return view('todolist', compact('dates'));
     }
 
 
@@ -178,10 +179,16 @@ class StudyInfoController extends Controller
             $motivation = 'You are doing great! Keep it up!';
         }
 
-        return redirect()->route('studyinfo.index')
+        // return redirect()->route('studyinfo.index')
+        //     ->with('success', 'Study info saved successfully!')
+        //     ->with('badge', $badge)
+        //     ->with('motivation', $motivation);
+
+             return redirect()->route('studyinfo.index')
             ->with('success', 'Study info saved successfully!')
             ->with('badge', $badge)
             ->with('motivation', $motivation);
+
     }
 
 

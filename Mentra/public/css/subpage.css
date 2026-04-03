@@ -76,7 +76,8 @@ tr:nth-child(even) {
 
 /* stop watch */
 .clock-section {
-    padding: 30px;
+    /* padding: 30px; */
+    padding-bottom: 30px;
     text-align: center;
 }
 
