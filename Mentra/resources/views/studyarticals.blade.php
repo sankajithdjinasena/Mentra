@@ -25,6 +25,9 @@
     </section>
 
 
+  
+
+
     @auth
 <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
