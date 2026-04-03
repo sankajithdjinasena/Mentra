@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\List_todo;
+use App\Models\Reminder;
 use App\Models\Study_info;
 use App\Models\Todolist;
 use Auth;
@@ -36,7 +37,15 @@ class TodolistController extends Controller
         for ($date = now()->startOfMonth(); $date <= now()->endOfMonth(); $date->addDay()) {
             $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
         }
-        return view('todolist', compact('todolists', 'date','dates'));
+
+        $reminderEvents = Reminder::forCurrentUser()->map(function ($reminder) {
+            return [
+                'title' => $reminder->reminder,
+                'start' => $reminder->date . 'T' . $reminder->time,
+            ];
+        })->values();
+
+        return view('todolist', compact('todolists', 'date', 'dates', 'reminderEvents'));
     }
 
     public function store(Request $request)
