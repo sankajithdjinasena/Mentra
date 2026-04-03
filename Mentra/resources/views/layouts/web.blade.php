@@ -112,8 +112,13 @@
                             <a class="nav-link reg-btn" href="{{ route('register') }}" title="Create a new Mentra account">Register</a>
                         </li>
                     @else
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link reg-btn" href="{{ route('register') }}">{{ Auth::user()->name }}</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link reg-btn" href="{{ route('profile') }}">
+                                {{ Auth::user()->name }}
+                            </a>
                         </li>
                         <a class="nav-link" style="font-weight: 800;font-size: 19px;color: black;" title="Logout From your Mentra account"
                             href="{{ route('logout') }}"

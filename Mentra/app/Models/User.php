@@ -43,7 +43,14 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function profile() {
+       return $this->hasOne(Profile::class);
+    }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
     /**
      * Get the attributes that should be cast.
      *
