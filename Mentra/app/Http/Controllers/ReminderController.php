@@ -8,6 +8,7 @@ use App\Models\Reminder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendReminderSms;
 
 class ReminderController extends Controller
 {
@@ -49,28 +50,39 @@ class ReminderController extends Controller
             'reminder' => 'required|string|max:255'
         ]);
 
-        $reminder = Reminder::create([
-            'user_id' => Auth::id(),
-            'date' => $request->date,
-            'time' => $request->time,
-            'reminder' => $request->reminder
-        ]);
+        // $reminder = Reminder::create([
+        //     'user_id' => Auth::id(),
+        //     'date' => $request->date,
+        //     'time' => $request->time,
+        //     'reminder' => $request->reminder
+        // ]);
 
+        $reminderTime = Carbon::createFromFormat(
+            'Y-m-d H:i',
+            "{$request->date} {$request->time}",
+            'Asia/Colombo'
+        );
 
-
-        $reminderTime = Carbon::createFromFormat('Y-m-d H:i', "{$request->date} {$request->time}", 'Asia/Colombo');
         $currentTime = Carbon::now('Asia/Colombo');
-
         $minutesDifference = $currentTime->diffInMinutes($reminderTime, false);
 
-        $reminderTime = now()->addMinutes($minutesDifference);
+        // $scheduleTime = now()->addMinutes($minutesDifference);
+     $scheduleTime = $reminderTime->isFuture() ? $reminderTime : now();
+        //Mail::to(Auth::user()->email)
+        //    ->later($scheduleTime, new ReminderEmail($reminder));
 
 
-        Mail::to(Auth::user()->email)
-            ->later($reminderTime, new ReminderEmail($reminder));
+        SendReminderSms::dispatch("+94765536428", "Test SMS immediately");
+        // dd($scheduleTime);
+        // SendReminderSms::dispatch(
+        //     // Auth::user()->phone, // make sure you have phone column
+        //     "+94765536428", // hardcoded for testing
+        //     // "Reminder: " . $request->reminder
+        //     "Test SMS: "
+        // )->delay($scheduleTime);
 
-
-        return redirect()->route('reminders.index')->with('success', 'Reminder added successfully!');
+        return redirect()->route('reminders.index')
+            ->with('success', 'Reminder added successfully!');
     }
 
 
