@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class YouTubeAnalysisController extends Controller
 {
@@ -10,25 +10,46 @@ class YouTubeAnalysisController extends Controller
     {
         $url = $request->input('youtube_url');
 
+        // Extract video ID
         preg_match('/(?:youtube\.com\/.*v=|youtu\.be\/)([0-9A-Za-z_-]{11})/', $url, $matches);
 
         if (empty($matches[1])) {
             return back()->with('error', 'Invalid YouTube URL');
         }
 
-        $videoId = $matches[1];
+        $videoId = escapeshellarg($matches[1]);
 
-        $response = Http::post('https://focuszen-yt.onrender.com/analyze', [
-            'video_id' => $videoId
-        ]);
+        // Python path (IMPORTANT for Windows)
+        $pythonPath = "python"; 
+        // Example if not working:
+        // $pythonPath = "C:\\Python39\\python.exe";
 
-        if ($response->successful()) {
-            $result = $response->json();
-            return view('youtube_form', [
-                'analysisResult' => $result
-            ]);
-        } else {
-            return back()->with('error', 'Error analyzing video: ' . $response->body());
+        $scriptPath = base_path('scripts/youtube_analysis.py');
+
+        // Build command safely
+        $command = "\"$pythonPath\" \"$scriptPath\" $videoId";
+
+        \Log::info("Command: " . $command);
+
+        $output = [];
+        $returnVar = 0;
+
+        exec($command . " 2>&1", $output, $returnVar);
+
+        if ($returnVar !== 0) {
+            \Log::error("Python Error: " . implode("\n", $output));
+            return back()->with('error', 'Error analyzing video.');
         }
+
+        $jsonOutput = implode("", $output);
+
+        $analysisResult = json_decode($jsonOutput, true);
+
+
+        if (!$analysisResult) {
+            return back()->with('error', 'Invalid response from analysis script.');
+        }
+
+        return view('youtube_form', compact('analysisResult'));
     }
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="{{ asset('system/images/logo.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/mentra-nav.png') }}" type="image/x-icon">
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,7 +39,7 @@
     {{-- navbar wow pulse --}}
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="{{ asset('img/logo-png.png') }}" class="logo-nav"></a>
+            <a class="navbar-brand" href="#"><img src="{{ asset('img/mentra-nav.png') }}" class="logo-nav"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
                             <li><a class="dropdown-item {{ request()->routeIs('community') ? 'active' : '' }}"
                                     href="{{ route('community') }}">Study community</a></li>
                             <li><a class="dropdown-item {{ request()->routeIs('music.index') ? 'active' : '' }}"
-                                    href="{{ route('music.index') }}">FocusZen Music</a></li>
+                                    href="{{ route('music.index') }}">Mentra Music</a></li>
                             {{-- <li><a class="dropdown-item {{ request()->routeIs('chatbot.index') ? 'active' : '' }}"
                                     href="{{ route('chatbot.index') }}">Chatbot</a></li> --}}
                             <li><a class="dropdown-item {{ request()->routeIs('youtube_video') ? 'active' : '' }}"
@@ -107,15 +107,15 @@
                 <ul class="d-flex navbar-nav right-ul" role="search">
                     <li class="nav-item">
                         @guest
-                            <a class="nav-link " href="{{ route('login') }}" title="Login to your FocusZen account">Login</a>
+                            <a class="nav-link " href="{{ route('login') }}" title="Login to your Mentra account">Login</a>
                         <li class="nav-item">
-                            <a class="nav-link reg-btn" href="{{ route('register') }}" title="Create a new FocusZen account">Register</a>
+                            <a class="nav-link reg-btn" href="{{ route('register') }}" title="Create a new Mentra account">Register</a>
                         </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link reg-btn" href="{{ route('register') }}">{{ Auth::user()->name }}</a>
                         </li>
-                        <a class="nav-link" style="font-weight: 800;font-size: 19px;color: black;" title="Logout From your FocusZen account"
+                        <a class="nav-link" style="font-weight: 800;font-size: 19px;color: black;" title="Logout From your Mentra account"
                             href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
@@ -143,8 +143,33 @@
 
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger intent="WELCOME" chat-title="FocusZen" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
-        language-code="en"></df-messenger>
+
+    <df-messenger
+        intent="WELCOME"
+        chat-title="Mentra"
+        agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
+        language-code="en"
+        chat-icon=".\img\Mentra-bg.png"> 
+    </df-messenger>
+
+    <style>
+        df-messenger {
+            --df-messenger-chat-background-color: #f0f2f5; 
+            --df-messenger-font-color: #333;
+            --df-messenger-send-icon: #007bff;
+            --df-messenger-chat-window-border-radius: 20px;
+            --df-messenger-message-border-radius: 12px;
+            --df-messenger-user-message: #007bff; 
+            --df-messenger-bot-message: #ffffff;   
+            --df-messenger-button-titlebar-color: #ffffff;
+            --df-messenger-button-titlebar-font-color: #000000;
+                        
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+        }
+    </style>
 
 
     {{-- Footer --}}
@@ -153,7 +178,7 @@
 
             <div class="row pb-5 pt-5">
                 <div class="col-md-3">
-                    <img src="{{ asset('img/logo-footer.jpg') }}" alt="FocusZen Logo" class="img-fluid">
+                    <img src="{{ asset('img/mentra-bg.png') }}" alt="Mentra Logo" class="img-fluid">
                     <h5 class="font-family-custom">Follow Us</h5>
                     <div class="d-flex justify-content-center">
                         <a href="https://facebook.com" class="text-light me-3"><i class="fa fa-facebook-official"
@@ -180,16 +205,16 @@
                 <div class="col-md-4">
                     <h5 class="font-family-custom">Contact</h5>
                     <ul class="list-unstyled footer_contact">
-                        <li><a href="mailto:contact@focuszen.com" class="text-light">contact@focuszen.com</a></li>
-                        <li><a href="tel:+1234567890" class="text-light">+94 765536428</a></li>
-                        <li>Kurunegala, Giriulla/Bopitiya</li>
+                        <li><a href="mailto:contact@mentra.com" class="text-light">contact@mentra.com</a></li>
+                        <li><a href="tel:+1234567890" class="text-light">+94 123456789</a></li>
+                        <li>Balangoda, Sri Lanka</li>
                     </ul>
                 </div>
             </div>
             <hr>
             <div class="row mt-1">
                 <div class="col all-right">
-                    <p class="font-family-custom">&copy; 2024 FocusZen. All Rights Reserved.</p>
+                    <p class="font-family-custom">&copy; 2026 Mentra. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
