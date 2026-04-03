@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="text-center mb-5">Top 10 Focurzers</h1>
+        <h1 class="text-center mb-5">Top 10 Focuzers</h1>
 
         <div class="container">
             <div class="card card-success">

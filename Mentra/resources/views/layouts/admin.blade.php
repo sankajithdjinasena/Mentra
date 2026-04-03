@@ -26,7 +26,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('system/css/myadmin.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/checkbox.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- fullCalendar -->
@@ -160,7 +160,7 @@
                                 <a href="{{ asset('dash_top') }}"
                                     class="nav-link  {{ Request::segment(1) === 'dash_top' ? 'active bg-secondary' : '' }}">
                                     <i class="fa fa-star nav-icon" aria-hidden="true"></i>
-                                    <p>Top study focurs</p>
+                                    <p>Top study focuzers</p>
                                 </a>
                             </li>
                         @else
