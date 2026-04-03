@@ -16,6 +16,12 @@ use App\Http\Controllers\YouTubeAnalysisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
+use Infobip\Configuration;
+use Infobip\Api\SmsApi;
+use Infobip\Model\SmsDestination;
+use Infobip\Model\SmsTextualMessage;
+use Infobip\Model\SmsAdvancedTextualRequest;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('/');
@@ -105,6 +111,30 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
+
+
+Route::get('/test-sms', function() {
+    $configuration = new Configuration(
+        host: env('INFOBIP_BASE_URL'),
+        apiKey: env('INFOBIP_API_KEY')
+    );
+
+    $smsApi = new SmsApi(config: $configuration);
+
+    $destination = new SmsDestination(to: "+94765536428");
+
+    $message = new SmsTextualMessage(
+        destinations: [$destination],
+        text: "Test direct SMS"
+    );
+
+    $request = new SmsAdvancedTextualRequest(messages: [$message]);
+
+    $response = $smsApi->sendSmsMessage($request);
+
+    dd($response); // will dump the response
+});
 
 // Route::get('/send-test-email', function () {
 //     Mail::raw('Test email from Laravel', function ($message) {
