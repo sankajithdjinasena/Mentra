@@ -5,11 +5,7 @@ import emoji
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import json
 
-
-API_KEY = 'AIzaSyAqj6nRQ50AacJs86Fmv6Dxfy--riJwyOk'
-
-# API_KEY = 'AIzaSyA9JhsOv4doKFd5C2gbHnzPy43_6as5898'
-
+API_KEY = "AIzaSyAqj6nRQ50AacJs86Fmv6Dxfy--riJwyOk"
 
 def analyze_comments(video_id):
     youtube = build('youtube', 'v3', developerKey=API_KEY)
