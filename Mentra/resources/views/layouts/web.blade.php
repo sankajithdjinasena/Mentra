@@ -143,8 +143,33 @@
 
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger intent="WELCOME" chat-title="Mentra" agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
-        language-code="en"></df-messenger>
+
+    <df-messenger
+        intent="WELCOME"
+        chat-title="Mentra"
+        agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
+        language-code="en"
+        chat-icon=".\img\Mentra-bg.png"> 
+    </df-messenger>
+
+    <style>
+        df-messenger {
+            --df-messenger-chat-background-color: #f0f2f5; 
+            --df-messenger-font-color: #333;
+            --df-messenger-send-icon: #007bff;
+            --df-messenger-chat-window-border-radius: 20px;
+            --df-messenger-message-border-radius: 12px;
+            --df-messenger-user-message: #007bff; 
+            --df-messenger-bot-message: #ffffff;   
+            --df-messenger-button-titlebar-color: #ffffff;
+            --df-messenger-button-titlebar-font-color: #000000;
+                        
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 999;
+        }
+    </style>
 
 
     {{-- Footer --}}
