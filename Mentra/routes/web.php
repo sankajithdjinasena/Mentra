@@ -16,11 +16,7 @@ use App\Http\Controllers\YouTubeAnalysisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
-use Infobip\Configuration;
-use Infobip\Api\SmsApi;
-use Infobip\Model\SmsDestination;
-use Infobip\Model\SmsTextualMessage;
-use Infobip\Model\SmsAdvancedTextualRequest;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -114,32 +110,85 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/test-sms', function() {
-    $configuration = new Configuration(
-        host: env('INFOBIP_BASE_URL'),
-        apiKey: env('INFOBIP_API_KEY')
-    );
+// Route::get('/test-sms', function() {
+//     // 1. Check if ENV variables exist
+//     $host = env('INFOBIP_BASE_URL');
+//     $apiKey = env('INFOBIP_API_KEY');
 
-    $smsApi = new SmsApi(config: $configuration);
+//     if (!$host || !$apiKey) {
+//         return "Error: Missing Infobip credentials in .env file.";
+//     }
 
-    $destination = new SmsDestination(to: "+94765536428");
+//     try {
+//         // 2. Setup Configuration
+//         $configuration = new Configuration(
+//             host: $host,
+//             apiKey: $apiKey
+//         );
 
-    $message = new SmsTextualMessage(
-        destinations: [$destination],
-        text: "Test direct SMS"
-    );
+//         $smsApi = new SmsApi(config: $configuration);
 
-    $request = new SmsAdvancedTextualRequest(messages: [$message]);
+//         // 3. Build the Message
+//         $destination = new SmsDestination(to: "94765536428"); // Removed '+' as some SDK versions prefer digits only
 
-    $response = $smsApi->sendSmsMessage($request);
+//         $message = new SmsTextualMessage(
+//             destinations: [$destination],
+//             text: "Hello from Mentra! Your SMS integration is working.",
+//             from: "MentraApp" // Added a 'from' identifier
+//         );
 
-    dd($response); // will dump the response
-});
+//         $request = new SmsAdvancedTextualRequest(messages: [$message]);
 
-// Route::get('/send-test-email', function () {
-//     Mail::raw('Test email from Laravel', function ($message) {
-//         $message->to('sanodyav@gmail.com')
-//                 ->subject('Test Email');
-//     });
-//     return 'Test email sent!';
+//         // 4. Send
+//         $response = $smsApi->sendSmsMessage($request);
+
+//         return dd($response);
+
+//     } catch (Exception $e) {
+//         return "Failed to send SMS: " . $e->getMessage();
+//     }
+// });
+
+
+// Route::get('/test-sms', function () {
+
+//     $host = env('INFOBIP_BASE_URL');
+//     $apiKey = env('INFOBIP_API_KEY');
+
+//     try {
+//         $configuration = new \Infobip\Configuration(
+//             host: $host,
+//             apiKey: $apiKey
+//         );
+
+//         $smsApi = new \Infobip\Api\SmsApi(config: $configuration);
+
+//         $destination = new \Infobip\Model\SmsDestination(
+//             to: '94713545642'
+//         );
+
+//         $message = new \Infobip\Model\SmsTextualMessage(
+//             destinations: [$destination],
+//             text: "Hello from Mentra!",
+//             from: "InfoSMS"
+//         );
+
+//         $request = new \Infobip\Model\SmsAdvancedTextualRequest(
+//             messages: [$message]
+//         );
+
+//         $response = $smsApi->sendSmsMessage($request);
+
+//      $details = $response->getMessages()[0];
+
+//      $messageId = $details->getMessageId();
+
+// return [
+//     'messageId' => $messageId,
+//     'status' => $details->getStatus()->getName(),
+// ];
+
+//     } catch (\Exception $e) {
+//         return "Final Error Check: " . $e->getMessage();
+//     }
 // });
