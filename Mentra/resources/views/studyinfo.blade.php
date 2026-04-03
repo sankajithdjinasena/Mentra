@@ -4,8 +4,7 @@
     <title>Mentra | Study Info</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
- 
-    <section class="container sec">
+    
         <h2 class="mb-4">Log Your Study Hours</h2>
 
         <div class="content-wrapper row wow fadeInDown">

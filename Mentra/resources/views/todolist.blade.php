@@ -4,6 +4,7 @@
     <title>Mentra | To Do List</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
 
        <style>
         canvas {
@@ -14,28 +15,295 @@
             margin: 0 auto;
         }
     </style>
+    
+    <style>
+        :root {
+            --primary: #28a745;
+            --primary-hover: #4caf50;
+            --dark: #043504;
+            --surface: #ffffff;
+            --surface-soft: #f4fff4;
+            --text: #113011;
+            --text-muted: #4f6d4f;
+            --border: #d9efd9;
+        }
 
-      <section class="container sec">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-shell {
+            width: min(1150px, 92%);
+            margin: 28px auto 40px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .topbar h1 {
+            font-family: "Merienda", serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .topbar a {
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.92rem;
+            transition: 0.2s ease;
+        }
+
+        .topbar a:hover {
+            background: #fff;
+            color: var(--dark);
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 8px 28px rgba(4, 53, 4, 0.08);
+            padding: 22px;
+        }
+
+        .section + .section {
+            margin-top: 22px;
+        }
+
+        .section h2 {
+            font-family: "Merienda", serif;
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .section p.desc {
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .calendar-shell {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .calendar-head {
+            background: var(--dark);
+            color: #fff;
+            padding: 12px 16px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .calendar-week,
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-week div {
+            background: #eef8ee;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .calendar-grid div {
+            height: 82px;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .calendar-grid div:nth-child(7n) {
+            border-right: none;
+        }
+
+        .stats-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 14px;
+        }
+
+        .panel {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .panel h4 {
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .fake-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 160px;
+        }
+
+        .fake-bars div {
+            flex: 1;
+            border-radius: 8px 8px 0 0;
+            background: linear-gradient(180deg, var(--primary-hover), var(--primary));
+        }
+
+        .line-chart {
+            height: 160px;
+            border-radius: 12px;
+            border: 1px dashed #b9dbbb;
+            background:
+                linear-gradient(135deg, rgba(40, 167, 69, 0.14), rgba(4, 53, 4, 0.06));
+        }
+
+        .todo-expand {
+            display: none;
+            width: 100%;
+        }
+
+        .todo-card.active .todo-expand {
+            display: block;
+        }
+
+        #remindersCalendar {
+            min-height: 540px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+    </style>
+
+    <section class="container sec">
+
+    <div class="content-wrapper row wow fadeInDown"> 
+        <section class="section">
+            <h2>To-Do</h2>
+            <div class="todo-grid">
+                @forelse ($todolists as $todolist)
+                    @foreach ($todolist->listTodos as $todo)
+                        <article class="todo-card" data-todo-card>
+                            <div class="todo-main">
+                                <strong class="{{ $todo->active_status ? 'done' : '' }}">{{ $todo->todo }}</strong>
+                                <small>{{ $todolist->date }}</small>
+                            </div>
+
+
+                            <div class="todo-actions">
+
+                                
+
+                                <input type="checkbox"
+                                    class="todo-check mark-as-read"
+                                    data-id="{{ $todo->id }}"
+                                    {{ $todo->active_status ? 'checked' : '' }}
+                                    aria-label="Mark todo as done">
+
+                                <button type="button" class="action-pill primary" data-toggle-do>Start</button>
+<!-- 
+                                <button type="button" class="action-pill todo-pill" aria-label="Edit todo" title="Edit">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.33H5v-.92l9.06-9.06.92.92-9.06 9.06zM20.71 7.04a1.004 1.004 0 0 0 0-1.42l-2.34-2.34a1.004 1.004 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"></path></svg>
+                                </button> -->
+
+                                <form class="todo-delete-form" action="{{ route('todolist.delete', $todo->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="todo-delete-btn" aria-label="Delete todo" title="Delete">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 14H7L6 7zm3-3h6l1 2H8l1-2z"></path></svg>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="todo-expand">
+                                <div class="todo-expand-row">
+                                    <div class="todo-timer-row">
+                                        <div class="timer">
+                                            <span data-timer-hr>00</span>
+                                            <span class="timer-label">Hr</span>
+                                            <span data-timer-min>00</span>
+                                            <span class="timer-label">Min</span>
+                                            <span data-timer-sec>00</span>
+                                            <span class="timer-label">Sec</span>
+                                            <span data-timer-count>00</span>
+                                        </div>
+                                        <div class="timer-actions">
+                                            <button type="button" class="timer-btn start" data-timer-start aria-label="Start timer" title="Start">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                                            </button>
+                                            <button type="button" class="timer-btn stop" data-timer-stop aria-label="Stop timer" title="Stop">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"></path></svg>
+                                            </button>
+                                            <button type="button" class="timer-btn reset" data-timer-reset aria-label="Reset timer" title="Reset">
+                                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 12.65-5.65z"></path></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="todo-expand-row">
+                                    <label class="music-label" for="music-{{ $todo->id }}">Choose music</label>
+                                    <select id="music-{{ $todo->id }}" class="music-select" data-music-select>
+                                        <option value="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO">🎹 Study Piano</option>
+                                        <option value="https://open.spotify.com/embed/playlist/37i9dQZF1DX7EF8wVxBVhG?utm_source=generator">🎧 Binaural Beats</option>
+                                        <option value="https://open.spotify.com/embed/playlist/37i9dQZF1DXdLK5wjKyhVm?utm_source=generator">☁️ ChillHop</option>
+                                        <option value="https://open.spotify.com/embed/playlist/6zCID88oNjNv9zx6puDHKj?utm_source=generator">☕ Lofi Hip-Hop</option>
+                                        <option value="https://open.spotify.com/embed/playlist/5cwPclg5ZtafoBPWgZMHMb?utm_source=generator">🎻 Classics</option>
+                                        <option value="https://open.spotify.com/embed/playlist/25u3wuY2IcmOSaq1FTPLg5?utm_source=generator">🟫 Brown Noise</option>
+                                        <option value="https://open.spotify.com/embed/playlist/37i9dQZF1DWWb1L5n1gkOJ?utm_source=generator">🕯️ Ambient Study</option>
+                                        <option value="https://open.spotify.com/embed/playlist/36XD4lwp7BiEHZhMpLFRjv?utm_source=generator">🎵 Sinhala Lo-FI</option>
+                                        <option value="https://open.spotify.com/embed/playlist/37i9dQZF1DWX5ZkTCLvHmi?utm_source=generator">🎶 Tamil Lo-Fi</option>
+                                    </select>
+                                </div>
+                                <div class="todo-expand-row">
+                                    <iframe data-spotify-frame data-testid="embed-iframe" class="spotify-embed"
+                                        src="https://open.spotify.com/embed/playlist/6zCID88oNjNv9zx6puDHKj?utm_source=generator"
+                                        width="100%" height="352" frameBorder="0" allowfullscreen=""
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </article>
+                    @endforeach
+                @empty
+                    <div class="todo-empty">No to-do items for this date.</div>
+                @endforelse
+
+                <article class="todo-card add">
+                    <div class="plus">+</div>
+                    <strong>Add To-do</strong>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Reminders Calendar</h2>
+            <p class="desc">Your upcoming reminders are shown here.</p>
+            <div id="remindersCalendar"></div>
+        </section>
+
+
         
-        <div class="content-wrapper row wow fadeInDown">
-            <!-- Clock Section -->
-           
-            <div class="clock-section col-md-6">
-                 <h2 class="mb-4">Log Your Study Hours</h2>
-                <div id="time">
-                    <span class="digit" id="hr">00</span>
-                    <span class="txt">Hr</span>
-                    <span class="digit" id="min">00</span>
-                    <span class="txt">Min</span>
-                    <span class="digit" id="sec">00</span>
-                    <span class="txt">Sec</span>
-                    <span class="digit" id="count">00</span>
-                </div>
-                <div id="buttons">
-                    <button class="btn" id="start">Start</button>
-                    <button class="btn" id="stop">Stop</button>
-                    <button class="btn" id="reset">Reset</button>
-                </div>
                 <br>
                 <br>
                 <form action="{{ route('studyinfo.store') }}" method="POST">
@@ -50,147 +318,12 @@
 
                     <button type="submit">Save Study Info</button>
                 </form>
-            </div>
-
-            <!-- Study Log Section -->
-          <div class="study-section col-md-6">
-            <h2 class="text-center mb-4">Focus Music for Studying</h2>
-            
-            <div class="accordion" id="musicAccordion">
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingPiano">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePiano">
-                            🎹 Study Piano
-                        </button>
-                    </h2>
-                    <div id="collapsePiano" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-                            <iframe style="border-radius:0 0 12px 12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" width="100%" height="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingBinaural">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBinaural">
-                            🎧 Binaural Beats
-                        </button>
-                    </h2>
-                    <div id="collapseBinaural" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX7EF8wVxBVhG?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingChillHop">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChillHop">
-                            ☁️ ChillHop
-                        </button>
-                    </h2>
-                    <div id="collapseChillHop" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdLK5wjKyhVm?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingLofi">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLofi">
-                            ☕ Lofi Hip-Hop
-                        </button>
-                    </h2>
-                    <div id="collapseLofi" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6zCID88oNjNv9zx6puDHKj?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingClassics">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClassics">
-                            🎻 Classics
-                        </button>
-                    </h2>
-                    <div id="collapseClassics" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5cwPclg5ZtafoBPWgZMHMb?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingBrown">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBrown">
-                            🟫 Brown Noise
-                        </button>
-                    </h2>
-                    <div id="collapseBrown" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/25u3wuY2IcmOSaq1FTPLg5?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingAmbient">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAmbient">
-                            🕯️ Ambient Study
-                        </button>
-                    </h2>
-                    <div id="collapseAmbient" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWb1L5n1gkOJ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingSinhala">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSinhala">
-                            🇱🇰 Sinhala Lo-FI
-                        </button>
-                    </h2>
-                    <div id="collapseSinhala" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/36XD4lwp7BiEHZhMpLFRjv?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>                </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTamil">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTamil">
-                            🇮🇳 Tamil Lo-Fi
-                        </button>
-                    </h2>
-                    <div id="collapseTamil" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
-                        <div class="accordion-body p-0">
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWX5ZkTCLvHmi?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>                </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        
-
-            
 
 
 
-            <!-- <h3 class="mt-5">Your Study Logs for {{ now()->format('F Y') }}</h3>
-            <canvas id="studyChart"></canvas> -->
-        </div>
-    </section>
 
 
-
-    <section class="wow fadeInDown">
+    <!-- <section class="wow fadeInDown">
         <div class="row">
             <div class="col-md-6">
                 <h2>Add To-Do List</h2>
@@ -241,7 +374,7 @@
                     </ul>
                 @endforeach
             </div>
-        </div>
+        </div> -->
 
 
 
@@ -405,7 +538,7 @@
             checkbox.addEventListener('change', function() {
                 var todoId = this.getAttribute('data-id');
                 var isChecked = this.checked;
-                var listItem = this.closest('li').querySelector('span');
+                var listItem = this.closest('.todo-card').querySelector('.todo-main strong');
 
                 fetch(`/todolist/${todoId}/markdone`, {
                         method: 'PUT',
@@ -431,6 +564,209 @@
                     })
                     .catch(error => console.error('Error:', error));
             });
+        });
+
+        const todoCards = Array.from(document.querySelectorAll('[data-todo-card]'));
+
+        function formatTimerValue(value) {
+            return value < 10 ? `0${value}` : `${value}`;
+        }
+
+        function renderTimer(state) {
+            state.hrEl.textContent = formatTimerValue(state.hour);
+            state.minEl.textContent = formatTimerValue(state.minute);
+            state.secEl.textContent = formatTimerValue(state.second);
+            state.countEl.textContent = formatTimerValue(state.count);
+        }
+
+        function stopTimer(state) {
+            state.running = false;
+            if (state.timeoutId) {
+                clearTimeout(state.timeoutId);
+                state.timeoutId = null;
+            }
+        }
+
+        function resetTimer(state) {
+            stopTimer(state);
+            state.hour = 0;
+            state.minute = 0;
+            state.second = 0;
+            state.count = 0;
+            renderTimer(state);
+        }
+
+        function tickTimer(state) {
+            if (!state.running) {
+                return;
+            }
+
+            state.count += 1;
+
+            if (state.count === 100) {
+                state.second += 1;
+                state.count = 0;
+            }
+
+            if (state.second === 60) {
+                state.minute += 1;
+                state.second = 0;
+            }
+
+            if (state.minute === 60) {
+                state.hour += 1;
+                state.minute = 0;
+                state.second = 0;
+            }
+
+            renderTimer(state);
+            state.timeoutId = setTimeout(() => tickTimer(state), 10);
+        }
+
+        function startTimer(state) {
+            if (state.running) {
+                return;
+            }
+            state.running = true;
+            tickTimer(state);
+        }
+
+        function pauseTimer(state) {
+            stopTimer(state);
+        }
+
+        function getElapsedHoursDecimal(state) {
+            const totalHours =
+                state.hour +
+                (state.minute / 60) +
+                (state.second / 3600) +
+                (state.count / 360000);
+
+            return Number(totalHours.toFixed(4)).toString();
+        }
+
+        function printElapsedTime(card, state, reason) {
+            const titleEl = card.querySelector('.todo-main strong');
+            const title = titleEl ? titleEl.textContent.trim() : 'Task';
+            console.log(`[Todo Session Closed] ${title} | Elapsed: ${getElapsedHoursDecimal(state)} hrs | Reason: ${reason}`);
+        }
+
+        function closeCardPanel(card, reason = 'manual') {
+            const state = card.__todoTimerState;
+            if (!card.classList.contains('active')) {
+                return;
+            }
+
+            card.classList.remove('active');
+            if (state) {
+                pauseTimer(state);
+                printElapsedTime(card, state, reason);
+            }
+
+            const toggleButton = card.querySelector('[data-toggle-do]');
+            if (toggleButton) {
+                toggleButton.textContent = 'Start';
+            }
+        }
+
+        function activateCard(card) {
+            todoCards.forEach((otherCard) => {
+                if (otherCard !== card && otherCard.classList.contains('active')) {
+                    closeCardPanel(otherCard, 'switch-card');
+                }
+            });
+
+            card.classList.add('active');
+            const toggleButton = card.querySelector('[data-toggle-do]');
+            if (toggleButton) {
+                toggleButton.textContent = 'Pause';
+            }
+        }
+
+        todoCards.forEach((card) => {
+            const doToggle = card.querySelector('[data-toggle-do]');
+            const startBtn = card.querySelector('[data-timer-start]');
+            const stopBtn = card.querySelector('[data-timer-stop]');
+            const resetBtn = card.querySelector('[data-timer-reset]');
+            const musicSelect = card.querySelector('[data-music-select]');
+            const spotifyFrame = card.querySelector('[data-spotify-frame]');
+
+            const state = {
+                running: false,
+                hour: 0,
+                minute: 0,
+                second: 0,
+                count: 0,
+                timeoutId: null,
+                hrEl: card.querySelector('[data-timer-hr]'),
+                minEl: card.querySelector('[data-timer-min]'),
+                secEl: card.querySelector('[data-timer-sec]'),
+                countEl: card.querySelector('[data-timer-count]'),
+            };
+
+            card.__todoTimerState = state;
+            renderTimer(state);
+
+            if (musicSelect && spotifyFrame) {
+                spotifyFrame.src = musicSelect.value;
+                musicSelect.addEventListener('change', function() {
+                    spotifyFrame.src = this.value;
+                });
+            }
+
+            if (doToggle) {
+                doToggle.addEventListener('click', function() {
+                    if (card.classList.contains('active')) {
+                        closeCardPanel(card, 'toggle-pause');
+                    } else {
+                        activateCard(card);
+                        startTimer(state);
+                    }
+                });
+            }
+
+            if (startBtn) {
+                startBtn.addEventListener('click', function() {
+                    activateCard(card);
+                    startTimer(state);
+                });
+            }
+
+            if (stopBtn) {
+                stopBtn.addEventListener('click', function() {
+                    pauseTimer(state);
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    resetTimer(state);
+                });
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('remindersCalendar');
+            if (!calendarEl) {
+                return;
+            }
+
+            const events = @json($reminderEvents ?? []);
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: events,
+            });
+
+            calendar.render();
         });
     </script>
 @endsection
