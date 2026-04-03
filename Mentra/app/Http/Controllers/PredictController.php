@@ -15,6 +15,7 @@ class PredictController extends Controller
 
     public function predict(Request $request)
     {
+
         $data = $request->except('_token');
 
         $processedData = [
@@ -37,15 +38,21 @@ class PredictController extends Controller
         $processedData['Systolic_BP'] = (int) $data['Systolic_BP'];
         $processedData['Diastolic_BP'] = (int) $data['Diastolic_BP'];
 
+   
+
+        // Change 127.0.0.1 to localhost
+        // $response = Http::timeout(120)->post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
+        // $response = Http::timeout(120)->post('http://127.0.0.1:5001/predictsleepDuration', $processedData);
+
+$response = Http::timeout(-1)
+    ->withHeaders([
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json',
+    ])
+    ->post('http://10.213.16.218:5001/predictsleepDuration', $processedData);
 
 
-        // $response = Http::post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
-
-        // $response = Http::timeout(60)->post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
-
-           $response = Http::timeout(60)->post('http://localhost:5000/predictsleepDuration', $processedData);
-
-        dd($response);
+        // dd($response);
 
         if ($response->successful()) {
             $predictedSleepDuration = $response->json()['predicted_sleep_duration'] ?? null;
