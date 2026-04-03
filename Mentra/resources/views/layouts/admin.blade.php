@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Focuzen | Admin DashBoard</title>
+    <title>Mentra | Admin DashBoard</title>
     <link rel="shortcut icon" href="{{ asset('system/images/logo.jpg') }}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -192,7 +192,7 @@
                     <div class="offset-md-3 col-md-6 justify-content-md-center align-self-center mb-5 mb-md-0">
                         <span id="getYear">{{ date('Y') }}</span> &copy; &nbsp; &nbsp;
                         <a href="{{ route('/') }}" target="_blank">
-                            <img src="{{ asset('img/logo-png - Copy.png') }}" alt="FocusZen Copyright"
+                            <img src="{{ asset('img/logo-png - Copy.png') }}" alt="Mentra Copyright"
                                 style="height: 22px; vertical-align: middle;">
                         </a>
                         <span class="ms-2">&nbsp;&nbsp; &nbsp; All rights reserved.</span>

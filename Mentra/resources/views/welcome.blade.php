@@ -1,7 +1,7 @@
 @extends('layouts.web')
 
 @section('content')
-    <title>FocusZen | Home</title>
+    <title>Mentra | Home</title>
 
     {{-- carousel start --}}
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -47,7 +47,7 @@
     {{-- About Us Section --}}
     <section class="about py-4">
         <div class="rotating-text1 ">
-            About FocusZen
+            About Mentra
         </div>
         <div class="container">
             <div class="row">
@@ -60,12 +60,12 @@
                     <section class="video-content py-5 mt-3">
                         <h1 class="video-maintxt  wow bounceInLeft">Focus Your Mind, Master Your Study</h1>
                         <br>
-                        <p class="video-subtxt  wow bounceInRight">Welcome to FocusZen</p>
+                        <p class="video-subtxt  wow bounceInRight">Welcome to Mentra</p>
                         <div class="container about-div mt-5 ">
-                            <p class=" wow fadeInDown">At FocusZen, we help you achieve clarity, productivity, and balance.
+                            <p class=" wow fadeInDown">At Mentra, we help you achieve clarity, productivity, and balance.
                                 Designed to simplify
                                 your daily tasks and keep you on track, our platform empowers you to focus on what matters
-                                most. Whether you're managing work, studies, or personal goals, FocusZen is your companion
+                                most. Whether you're managing work, studies, or personal goals, Mentra is your companion
                                 for staying organized and mindful.
                                 <br><br>
                                 <span class="wow backInDown"> Stay focused. Stay zen.</span>
@@ -243,7 +243,7 @@
                                 <a href="#">
                                     <h3 class="">
                                         <blockquote>
-                                            <p>"I've never been this productive before. FocusZen keeps me on track every
+                                            <p>"I've never been this productive before. Mentra keeps me on track every
                                                 day!"</p>
                                             <cite>- Sarah Williams</cite>
                                         </blockquote>
@@ -263,7 +263,7 @@
                                 <a href="#">
                                     <h3 class="">
                                         <blockquote>
-                                            <p>"FocusZen keeps me motivated and on track!"</p>
+                                            <p>"Mentra keeps me motivated and on track!"</p>
                                             <cite>- Alex Carter</cite>
                                         </blockquote>
                                     </h3>
@@ -340,7 +340,7 @@
                                 <a href="#">
                                     <h3 class="">
                                         <blockquote>
-                                            <p>"FocusZen helps me achieve my goals effortlessly!"</p>
+                                            <p>"Mentra helps me achieve my goals effortlessly!"</p>
                                             <cite>- Marky Davis</cite>
                                         </blockquote>
                                     </h3>
@@ -359,7 +359,7 @@
                                 <a href="#">
                                     <h3 class="">
                                         <blockquote>
-                                            <p>"FocusZen helps me eliminate distractions and keep my priorities in line.
+                                            <p>"Mentra helps me eliminate distractions and keep my priorities in line.
                                                 It’s a must-have!"</p>
                                             <cite>- Jason Lee</cite>
                                         </blockquote>
@@ -379,7 +379,7 @@
                                 <a href="#">
                                     <h3 class="">
                                         <blockquote>
-                                            <p>"FocusZen has transformed my daily routine. I'm more productive than ever!"
+                                            <p>"Mentra has transformed my daily routine. I'm more productive than ever!"
                                             </p>
                                             <cite>- Michael Brown</cite>
                                         </blockquote>
