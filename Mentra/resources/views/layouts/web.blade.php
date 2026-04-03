@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="{{ asset('system/images/logo.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/mentra-nav.png') }}" type="image/x-icon">
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,7 +39,7 @@
     {{-- navbar wow pulse --}}
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="{{ asset('img/logo-png.png') }}" class="logo-nav"></a>
+            <a class="navbar-brand" href="#"><img src="{{ asset('img/mentra-nav.png') }}" class="logo-nav"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -153,7 +153,7 @@
 
             <div class="row pb-5 pt-5">
                 <div class="col-md-3">
-                    <img src="{{ asset('img/logo-footer.jpg') }}" alt="Mentra Logo" class="img-fluid">
+                    <img src="{{ asset('img/mentra-bg.png') }}" alt="Mentra Logo" class="img-fluid">
                     <h5 class="font-family-custom">Follow Us</h5>
                     <div class="d-flex justify-content-center">
                         <a href="https://facebook.com" class="text-light me-3"><i class="fa fa-facebook-official"
@@ -181,15 +181,15 @@
                     <h5 class="font-family-custom">Contact</h5>
                     <ul class="list-unstyled footer_contact">
                         <li><a href="mailto:contact@mentra.com" class="text-light">contact@mentra.com</a></li>
-                        <li><a href="tel:+1234567890" class="text-light">+94 765536428</a></li>
-                        <li>Kurunegala, Giriulla/Bopitiya</li>
+                        <li><a href="tel:+1234567890" class="text-light">+94 123456789</a></li>
+                        <li>Balangoda, Sri Lanka</li>
                     </ul>
                 </div>
             </div>
             <hr>
             <div class="row mt-1">
                 <div class="col all-right">
-                    <p class="font-family-custom">&copy; 2024 Mentra. All Rights Reserved.</p>
+                    <p class="font-family-custom">&copy; 2026 Mentra. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
