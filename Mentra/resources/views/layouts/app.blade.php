@@ -7,7 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Mentra</title>
+    <link rel="shortcut icon" href="{{ asset('img/mentra-nav.png') }}" type="image/x-icon">
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -31,7 +33,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,7 +77,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary ">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="{{ asset('img/logo-png.png') }}" class="logo-nav"></a>
+                <a class="navbar-brand" href="#"><img src="{{ asset('img/mentra-nav.png') }}" class="logo-nav"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
