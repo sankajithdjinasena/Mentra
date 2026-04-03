@@ -39,7 +39,13 @@ class PredictController extends Controller
 
 
 
-        $response = Http::post('https://focuszen-predictor.onrender.com/predictsleepDuration', $processedData);
+        // $response = Http::post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
+
+        // $response = Http::timeout(60)->post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
+
+           $response = Http::timeout(60)->post('http://localhost:5000/predictsleepDuration', $processedData);
+
+        dd($response);
 
         if ($response->successful()) {
             $predictedSleepDuration = $response->json()['predicted_sleep_duration'] ?? null;
