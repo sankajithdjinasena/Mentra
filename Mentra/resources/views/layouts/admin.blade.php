@@ -44,7 +44,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a title="Click to Visit Website" href="" class="nav-link" target="_blank"
+                    <a title="Click to Visit Website" href="{{ route('/') }}" class="nav-link" target="_blank"
                         style="padding: 0 17px;"><img style="width: 40px;" src="{{ asset('system/images/logo.jpg') }}"
                             alt="logo"></a>
                 </li>

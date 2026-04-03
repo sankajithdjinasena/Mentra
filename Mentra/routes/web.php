@@ -10,6 +10,8 @@ use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\StudyArticleController;
 use App\Http\Controllers\StudyInfoController;
 use App\Http\Controllers\TodolistController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\YouTubeAnalysisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -49,6 +51,11 @@ Route::post('/articles', [StudyArticleController::class, 'storeuserartical'])->n
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'storeOrUpdate'])->name('profile.update');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+
     Route::get('/study_progress', [StudyInfoController::class, 'progressindex'])->name('study_progress.index');
     Route::post('/reminders/add', [ReminderController::class, 'store'])->name('reminders.store');
     Route::post('/todolist/add', [TodolistController::class, 'store'])->name('todolist.store');
