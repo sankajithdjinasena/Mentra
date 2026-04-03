@@ -10,9 +10,17 @@ use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\StudyArticleController;
 use App\Http\Controllers\StudyInfoController;
 use App\Http\Controllers\TodolistController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\YouTubeAnalysisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+
+use Infobip\Configuration;
+use Infobip\Api\SmsApi;
+use Infobip\Model\SmsDestination;
+use Infobip\Model\SmsTextualMessage;
+use Infobip\Model\SmsAdvancedTextualRequest;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +60,11 @@ Route::post('/articles', [StudyArticleController::class, 'storeuserartical'])->n
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'storeOrUpdate'])->name('profile.update');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+
     Route::get('/study_progress', [StudyInfoController::class, 'progressindex'])->name('study_progress.index');
     Route::post('/reminders/add', [ReminderController::class, 'store'])->name('reminders.store');
     Route::post('/todolist/add', [TodolistController::class, 'store'])->name('todolist.store');
@@ -101,6 +114,30 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
+
+
+Route::get('/test-sms', function() {
+    $configuration = new Configuration(
+        host: env('INFOBIP_BASE_URL'),
+        apiKey: env('INFOBIP_API_KEY')
+    );
+
+    $smsApi = new SmsApi(config: $configuration);
+
+    $destination = new SmsDestination(to: "+94765536428");
+
+    $message = new SmsTextualMessage(
+        destinations: [$destination],
+        text: "Test direct SMS"
+    );
+
+    $request = new SmsAdvancedTextualRequest(messages: [$message]);
+
+    $response = $smsApi->sendSmsMessage($request);
+
+    dd($response); // will dump the response
+});
 
 // Route::get('/send-test-email', function () {
 //     Mail::raw('Test email from Laravel', function ($message) {

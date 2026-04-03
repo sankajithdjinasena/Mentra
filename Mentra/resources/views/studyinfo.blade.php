@@ -4,15 +4,7 @@
     <title>Mentra | Study Info</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
-    <style>
-        canvas {
-            margin-top: 30px;
-            width: 800px !important;
-            height: 400px !important;
-            border-radius: 10px;
-            margin: 0 auto;
-        }
-    </style>
+ 
     <section class="container sec">
         <h2 class="mb-4">Log Your Study Hours</h2>
 

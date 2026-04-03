@@ -42,14 +42,14 @@ class PredictController extends Controller
 
         // Change 127.0.0.1 to localhost
         // $response = Http::timeout(120)->post('http://127.0.0.1:5000/predictsleepDuration', $processedData);
-        // $response = Http::timeout(120)->post('http://127.0.0.1:5001/predictsleepDuration', $processedData);
+        $response = Http::timeout(120)->post('http://127.0.0.1:5001/predictsleepDuration', $processedData);
 
-$response = Http::timeout(-1)
-    ->withHeaders([
-        'Content-Type' => 'application/json',
-        'Accept' => 'application/json',
-    ])
-    ->post('http://10.213.16.218:5001/predictsleepDuration', $processedData);
+    // $response = Http::timeout(-1)
+    //     ->withHeaders([
+    //         'Content-Type' => 'application/json',
+    //         'Accept' => 'application/json',
+    //     ])
+    //     ->post('http://10.213.16.218:5001/predictsleepDuration', $processedData);
 
 
         // dd($response);
