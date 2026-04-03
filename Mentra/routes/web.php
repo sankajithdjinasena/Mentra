@@ -24,6 +24,9 @@ Route::get('/home', function () {
     return view('welcome');
 })->name('/home');
 
+Route::redirect('/home-in-dev', '/home-in-dev-static')->name('home.in.dev.redirect');
+Route::view('/home-in-dev-static', 'home-in-dev-static')->name('home.in.dev.static');
+
 
 
 Route::get('/sleepredict', [App\Http\Controllers\PredictController::class, 'index'])->name('sleepredict');
