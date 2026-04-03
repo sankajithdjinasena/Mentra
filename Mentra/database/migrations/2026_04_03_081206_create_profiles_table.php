@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->integer('age')->nullable();
+        $table->integer('mobile')->nullable();
         $table->enum('gender', ['male', 'female', 'other'])->nullable();
         $table->integer('heart_rate')->nullable();
         $table->enum('bmi_category', ['Normal', 'Normal Weight', 'Obese', 'Overweight'])->nullable();

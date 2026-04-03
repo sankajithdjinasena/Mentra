@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Auth;
 
 class CourseController extends Controller
 {
@@ -26,9 +27,20 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+   public function store(Request $request)
     {
-        //
+        $request->validate([
+            'subject_name' => 'required|string|max:255',
+            'result'       => 'required|string|max:50',
+        ]);
+
+        Course::create([
+            'user_id'      => Auth::id(),
+            'subject_name' => $request->subject_name,
+            'result'       => $request->result,
+        ]);
+
+        return back()->with('success', 'Academic record added successfully!');
     }
 
     /**

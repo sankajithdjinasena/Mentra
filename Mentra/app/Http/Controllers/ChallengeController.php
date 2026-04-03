@@ -24,11 +24,14 @@ class ChallengeController extends Controller
     $topUsers = Study_info::select('user_id', DB::raw('SUM(hours) as total_hours'))
         ->groupBy('user_id')
         ->orderBy('total_hours', 'desc')
-        ->take(10)
+        ->take(5)
         ->with('user')
         ->get();
 
-    return view('topfocuzers', compact('topUsers'));
+         $challenges = Challenge::where('status', 1)->get();
+
+
+    return view('topfocuzers', compact('topUsers','challenges'));
 }
 
 public function showChallenges()

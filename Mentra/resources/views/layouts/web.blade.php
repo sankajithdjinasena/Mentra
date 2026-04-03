@@ -52,14 +52,14 @@
                             href="{{ route('/') }}">Home</a>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('studyinfo.index') ? 'active' : '' }}"
                             href="{{ route('studyinfo.index') }}">Start Study</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('todolist.index') ? 'active' : '' }}"
-                            href="{{ route('todolist.index') }}">To do list</a>
+                            href="{{ route('todolist.index') }}">Start Study</a>
                     </li>
 
                     <li class="nav-item">
@@ -81,8 +81,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item {{ request()->routeIs('community') ? 'active' : '' }}"
                                     href="{{ route('community') }}">Study community</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('music.index') ? 'active' : '' }}"
-                                    href="{{ route('music.index') }}">Mentra Music</a></li>
+                            <!-- <li><a class="dropdown-item {{ request()->routeIs('music.index') ? 'active' : '' }}"
+                                    href="{{ route('music.index') }}">Mentra Music</a></li> -->
                             {{-- <li><a class="dropdown-item {{ request()->routeIs('chatbot.index') ? 'active' : '' }}"
                                     href="{{ route('chatbot.index') }}">Chatbot</a></li> --}}
                             <li><a class="dropdown-item {{ request()->routeIs('youtube_video') ? 'active' : '' }}"
@@ -95,10 +95,10 @@
                                 <a class="dropdown-item {{ request()->routeIs('topfocuzers.index') ? 'active' : '' }}"
                                     href="{{ route('topfocuzers.index') }}">Top Focuzers</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="dropdown-item {{ request()->routeIs('challenges.index') ? 'active' : '' }}"
                                     href="{{ route('userchallenges.index') }}">Study Challenges</a>
-                            </li>
+                            </li> -->
 
                         </ul>
                     </li>
@@ -202,7 +202,7 @@
                     <ul class="list-unstyled footer_links">
                         <li><a href="{{ route('/') }}" class="text-light">Home</a></li>
                         <li><a href="{{ route('reminders.index') }}" class="text-light">Reminders</a></li>
-                        <li><a href="{{ route('studyinfo.index') }}" class="text-light">Start Study</a></li>
+                        <!-- <li><a href="{{ route('studyinfo.index') }}" class="text-light">Start Study</a></li> -->
                         <li><a href="{{ route('study_progress.index') }}" class="text-light">Study Progress</a></li>
                     </ul>
                 </div>

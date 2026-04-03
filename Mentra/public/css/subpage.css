@@ -71,7 +71,15 @@ tr:nth-child(even) {
     background: #f9f9f9;
 }
 
-
+.profile-btn{
+     background-image: linear-gradient(90deg, #196730, #439a0d) !important;
+     color: white !important;
+     font-weight: 600;
+     font-size: 18px;
+     border-radius: 22px;
+     margin-right: 20px;
+     font-family: "Nunito", serif;
+}
 
 
 /* stop watch */
