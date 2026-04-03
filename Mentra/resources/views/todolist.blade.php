@@ -185,13 +185,53 @@
             display: block;
         }
 
-        #remindersCalendar {
-            min-height: 540px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 10px;
+        .todo-card.add {
+            justify-content: stretch;
+            align-items: stretch;
+            text-align: left;
+            flex-direction: row;
+            min-height: 80px;
         }
+
+        .todo-card.add .todo-quick-add {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            flex-wrap: nowrap;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .todo-card.add .todo-quick-add input[type="text"] {
+            flex: 1 1 auto;
+            width: auto;
+            min-width: 0;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0 14px;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .todo-card.add .todo-quick-add input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+        }
+
+        .todo-card.add .todo-quick-add .plus {
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+        }
+
+        
 
     </style>
 
@@ -290,8 +330,12 @@
                 @endforelse
 
                 <article class="todo-card add">
-                    <div class="plus">+</div>
-                    <strong>Add To-do</strong>
+                    <form class="todo-quick-add" action="{{ route('todolist.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="date" value="{{ $date ?? now()->toDateString() }}">
+                        <input type="text" name="todos[]" placeholder="Add a new to-do item" maxlength="255" required aria-label="New to-do item">
+                        <button type="submit" class="plus" aria-label="Add to-do">+</button>
+                    </form>
                 </article>
             </div>
         </section>
@@ -300,23 +344,44 @@
             <h2>Reminders Calendar</h2>
             <p class="desc">Your upcoming reminders are shown here.</p>
             <div id="remindersCalendar"></div>
+
+            <div class="reminder-form-wrap">
+                <h3>Add New Reminder</h3>
+                <form id="reminderForm" action="{{ route('reminders.store') }}" method="POST" novalidate>
+                    @csrf
+                    <div class="reminder-form-grid">
+                        <div>
+                            <label for="reminder-date">Date</label>
+                            <input id="reminder-date" type="date" name="date"
+                                min="{{ now()->toDateString() }}" value="{{ now()->toDateString() }}" required>
+                        </div>
+
+                        <div>
+                            <label for="reminder-time">Time</label>
+                            <input id="reminder-time" type="time" name="time" required>
+                        </div>
+
+                        <div class="full">
+                            <label for="reminder-text">Reminder</label>
+                            <input id="reminder-text" type="text" name="reminder" maxlength="255"
+                                placeholder="e.g. Submit assignment at 6 PM" required>
+                        </div>
+                    </div>
+
+                    <div id="reminderFormErrors" class="reminder-errors" role="alert" aria-live="polite"></div>
+                    <button type="submit" id="reminderSubmitBtn" class="reminder-submit">Save Reminder</button>
+                </form>
+            </div>
         </section>
 
 
         
                 <br>
                 <br>
-                <form action="{{ route('studyinfo.store') }}" method="POST">
+                <form id="studyInfoForm" action="{{ route('studyinfo.store') }}" method="POST">
                     @csrf
-                    <label style="text-align: justify;">Date:</label>
-                    <input type="date" name="date" value="{{ now()->toDateString() }}"
-                        max="{{ now()->toDateString() }}" required>
-
-                    <label style="text-align: justify;">Study Hours:</label>
-                    <input type="number" name="hours" step="0.1" required min="0" max="24"
-                        placeholder="Enter hours studied" required>
-
-                    <button type="submit">Save Study Info</button>
+                    <input type="hidden" id="studyInfoDate" name="date" value="">
+                    <input type="hidden" id="studyInfoHours" name="hours" value="">
                 </form>
 
 
@@ -648,7 +713,31 @@
         function printElapsedTime(card, state, reason) {
             const titleEl = card.querySelector('.todo-main strong');
             const title = titleEl ? titleEl.textContent.trim() : 'Task';
-            console.log(`[Todo Session Closed] ${title} | Elapsed: ${getElapsedHoursDecimal(state)} hrs | Reason: ${reason}`);
+            const elapsedHours = getElapsedHoursDecimal(state);
+
+            console.log(`[Todo Session Closed] ${title} | Elapsed: ${elapsedHours} hrs | Reason: ${reason}`);
+
+            if (reason !== 'toggle-pause') {
+                return;
+            }
+
+            const form = document.getElementById('studyInfoForm');
+            const dateInput = document.getElementById('studyInfoDate');
+            const hoursInput = document.getElementById('studyInfoHours');
+
+            if (!form || !dateInput || !hoursInput) {
+                return;
+            }
+
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+            hoursInput.value = elapsedHours;
+
+            form.submit();
         }
 
         function closeCardPanel(card, reason = 'manual') {
@@ -661,6 +750,9 @@
             if (state) {
                 pauseTimer(state);
                 printElapsedTime(card, state, reason);
+                if (reason === 'toggle-pause') {
+                    resetTimer(state);
+                }
             }
 
             const toggleButton = card.querySelector('[data-toggle-do]');
@@ -679,7 +771,7 @@
             card.classList.add('active');
             const toggleButton = card.querySelector('[data-toggle-do]');
             if (toggleButton) {
-                toggleButton.textContent = 'Pause';
+                toggleButton.textContent = 'Stop';
             }
         }
 
@@ -756,7 +848,7 @@
 
             const events = @json($reminderEvents ?? []);
 
-            const calendar = new FullCalendar.Calendar(calendarEl, {
+            window.remindersCalendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 headerToolbar: {
                     left: 'prev,next today',
@@ -764,9 +856,107 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
                 events: events,
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false,
+                    hour12: false
+                }
             });
 
-            calendar.render();
+            window.remindersCalendar.render();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('reminderForm');
+            const errorsBox = document.getElementById('reminderFormErrors');
+            const submitBtn = document.getElementById('reminderSubmitBtn');
+            const dateInput = document.getElementById('reminder-date');
+
+            if (!form) {
+                return;
+            }
+
+            function showErrors(errors) {
+                if (!errorsBox) return;
+                const lines = [];
+                Object.values(errors || {}).forEach((messages) => {
+                    (messages || []).forEach((message) => lines.push(`<div>${message}</div>`));
+                });
+                errorsBox.innerHTML = lines.join('');
+            }
+
+            function clearErrors() {
+                if (!errorsBox) return;
+                errorsBox.innerHTML = '';
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                clearErrors();
+
+                const formData = new FormData(form);
+                const title = String(formData.get('reminder') || '').trim();
+                const date = String(formData.get('date') || '').trim();
+                const time = String(formData.get('time') || '').trim();
+
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: formData
+                    });
+
+                    if (response.status === 422) {
+                        const data = await response.json();
+                        showErrors(data.errors || {});
+                        return;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error('Failed to save reminder');
+                    }
+
+                    if (window.remindersCalendar && title && date && time) {
+                        // Just use the title, time is displayed via fc-event-time
+                        window.remindersCalendar.addEvent({
+                            title: title,
+                            start: `${date}T${time}`
+                        });
+                    }
+
+                    form.reset();
+                    if (dateInput) {
+                        dateInput.value = '{{ now()->toDateString() }}';
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Saved',
+                        text: 'Reminder added to calendar.',
+                        confirmButtonColor: '#28a745',
+                        timer: 2200
+                    });
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Could not save reminder. Please try again.',
+                        confirmButtonColor: '#dc3545'
+                    });
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
         });
     </script>
 @endsection
+
+
