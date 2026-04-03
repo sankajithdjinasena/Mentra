@@ -4,9 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
     <section class="container sec  wow fadeInDown">
         <h2>Study Focus Chatbot</h2>
-        <iframe allow="microphone;" width="350" height="430"
-            src="https://console.dialogflow.com/api-client/demo/embedded/6970697c-c0ef-4a7e-9345-54ad879609e3">
-        </iframe>
+        <iframe height="430" width="350" src="https://bot.dialogflow.com/beca812f-d88a-49f0-b50b-47dd21b21704"></iframe>
     </section>
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
@@ -14,7 +12,7 @@
     <df-messenger
         intent="WELCOME"
         chat-title="Mentra"
-        agent-id="6970697c-c0ef-4a7e-9345-54ad879609e3"
+        agent-id="beca812f-d88a-49f0-b50b-47dd21b21704"
         language-code="en"
         chat-icon=".\img\Mentra-bg.png"> 
     </df-messenger>
