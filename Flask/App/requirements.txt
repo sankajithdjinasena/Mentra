@@ -1,9 +1,0 @@
-Flask
-numpy
-scikit-learn
-gunicorn
-flask-cors
-google-api-python-client
-vaderSentiment
-nltk
-
