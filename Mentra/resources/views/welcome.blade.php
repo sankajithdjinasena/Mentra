@@ -413,7 +413,7 @@
                         <textarea name="message" class="form-control" rows="5" required>{{ old('message') }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" title="Submit Your Feedback">Submit Feedback</button>
+                    <button type="submit" class="btn btn-success" title="Submit Your Feedback">Submit Feedback</button>
                 </form>
             </div>
         </div>
