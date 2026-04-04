@@ -432,4 +432,47 @@
             </div>
         </div>
     </section>
+
+
+
+    <script>
+        async function enterPiP() {
+    const timerContainer = document.querySelector('#time'); // Your timer div
+    
+    try {
+        // Open a Picture-in-Picture window
+        const pipWindow = await window.documentPictureInPicture.requestWindow({
+            width: 300,
+            height: 150,
+        });
+
+        // Copy styles from main page to PiP window so it looks good
+        [...document.styleSheets].forEach((styleSheet) => {
+            try {
+                const cssRules = [...styleSheet.cssRules].map((rule) => rule.cssText).join('');
+                const style = document.createElement('style');
+                style.textContent = cssRules;
+                pipWindow.document.head.appendChild(style);
+            } catch (e) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = styleSheet.href;
+                pipWindow.document.head.appendChild(link);
+            }
+        });
+
+        // Move the timer element into the PiP window
+        pipWindow.document.body.append(timerContainer);
+
+        // When PiP is closed, put the timer back in the main page
+        pipWindow.addEventListener("pagehide", (event) => {
+            const playerContainer = document.querySelector(".clock-section");
+            const pipTimer = event.target.querySelector("#time");
+            playerContainer.prepend(pipTimer);
+        });
+    } catch (err) {
+        console.error("PiP failed", err);
+    }
+}
+        </script>
 @endsection

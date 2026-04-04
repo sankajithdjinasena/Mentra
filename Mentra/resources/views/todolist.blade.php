@@ -296,40 +296,7 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2>Reminders Calendar</h2>
-            <p class="desc">Your upcoming reminders are shown here.</p>
-            <div id="remindersCalendar"></div>
-
-            <div class="reminder-form-wrap">
-                <h3>Add New Reminder</h3>
-                <form id="reminderForm" action="{{ route('reminders.store') }}" method="POST" novalidate>
-                    @csrf
-                    <div class="reminder-form-grid">
-                        <div>
-                            <label for="reminder-date">Date</label>
-                            <input id="reminder-date" type="date" name="date"
-                                min="{{ now()->toDateString() }}" value="{{ now()->toDateString() }}" required>
-                        </div>
-
-                        <div>
-                            <label for="reminder-time">Time</label>
-                            <input id="reminder-time" type="time" name="time" required>
-                        </div>
-
-                        <div class="full">
-                            <label for="reminder-text">Reminder</label>
-                            <input id="reminder-text" type="text" name="reminder" maxlength="255"
-                                placeholder="e.g. Submit assignment at 6 PM" required>
-                        </div>
-                    </div>
-
-                    <div id="reminderFormErrors" class="reminder-errors" role="alert" aria-live="polite"></div>
-                    <button type="submit" id="reminderSubmitBtn" class="reminder-submit">Save Reminder</button>
-                </form>
-            </div>
-        </section>
-
+      
 
         
                 <br>
