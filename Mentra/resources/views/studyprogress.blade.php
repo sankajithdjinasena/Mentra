@@ -67,10 +67,12 @@
             <h3 class="fw-bold mb-3 align-items-center" >
                 <span class="me-2">😴</span> Check Your Sleep Health
             </h3>
-            <p class="text-muted fs-5" style="text-align: justify; padding:40px">
-                Your sleep directly affects your concentration, memory, and daily performance.
-                Check your predicted sleep duration and discover whether your body gets enough rest for better study success.
-            </p>
+            <p class="text-muted fs-5 fw-light italic" style="text-align: justify; padding:60px;">
+            <span class="d-block mb-2" style="color: #28a745; font-weight: 600;">Did you know?</span>
+            Your sleep directly affects your concentration, memory, and daily performance. 
+            Check your predicted sleep duration and discover whether your body gets enough rest for 
+            <span class="text-dark fw-bold">better study success.</span>
+        </p>
         </div>
         <div class="col-md-12 text-center">
             <form action="{{ route('sleepredict_result') }}" method="POST">

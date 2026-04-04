@@ -126,10 +126,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card card3c wow fadeInLeft">
-                        <h4>Music Library</h4>
-                        <p>Access a curated library of music tailored to enhance concentration. Whether you're studying,
-                            reading, or working, find the perfect background music to stay focused.</p>
-                        <a href="{{ route('music.index') }}" class="button">Try it now</a>
+                        <h4>Study Articles</h4>
+                        <p>Access a wide variety of educational articles to enhance your learning. From tips on time
+                            management
+                            to subject-specific resources, you'll find valuable content to help you succeed.</p>
+                        <a href="{{ route('articals.index') }}" class="button">Try it now</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -169,11 +170,11 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card card1c wow fadeInLeft">
-                        <h4>Check Your Sleep Time</h4>
-                        <p>Track your sleep patterns to ensure you're getting enough rest for optimal focus and study
-                            performance. A well-rested mind is a productive mind!</p>
-                        <a href="{{ route('sleepredict') }}" class="button">Try it now</a>
+                    <div class="card card5c wow fadeInRight">
+                        <h4>Earn Badges</h4>
+                        <p>Unlock achievement badges as you complete your study hours! Stay motivated by tracking your
+                            progress and earning rewards for your dedication. Every milestone brings a new badge. !</p>
+                        <a href="{{ route('study_progress.index') }}" class="button">Try it now</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -188,23 +189,8 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="card card3c wow fadeInLeft">
-                        <h4>Study Articles</h4>
-                        <p>Access a wide variety of educational articles to enhance your learning. From tips on time
-                            management
-                            to subject-specific resources, you'll find valuable content to help you succeed.</p>
-                        <a href="{{ route('articals.index') }}" class="button">Try it now</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card5c wow fadeInRight">
-                        <h4>Earn Badges</h4>
-                        <p>Unlock achievement badges as you complete your study hours! Stay motivated by tracking your
-                            progress and earning rewards for your dedication. Every milestone brings a new badge. !</p>
-                        <a href="{{ route('study_progress.index') }}" class="button">Try it now</a>
-                    </div>
-                </div>
+                
+               
             </div>
         </div>
     </div>
@@ -432,4 +418,8 @@
             </div>
         </div>
     </section>
+
+
+
+    
 @endsection

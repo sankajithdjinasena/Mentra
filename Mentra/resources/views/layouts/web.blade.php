@@ -87,8 +87,8 @@
                                     href="{{ route('chatbot.index') }}">Chatbot</a></li> --}}
                             <li><a class="dropdown-item {{ request()->routeIs('youtube_video') ? 'active' : '' }}"
                                     href="{{ route('youtube_video') }}">YouTube Video Analyzer</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('sleepredict') ? 'active' : '' }}"
-                                    href="{{ route('sleepredict') }}">Sleep Predictor</a></li>
+                            <!-- <li><a class="dropdown-item {{ request()->routeIs('sleepredict') ? 'active' : '' }}"
+                                    href="{{ route('sleepredict') }}">Sleep Predictor</a></li> -->
                             <li><a class="dropdown-item {{ request()->routeIs('articals.index') ? 'active' : '' }}"
                                     href="{{ route('articals.index') }}">Study Article</a></li>
                             <li>

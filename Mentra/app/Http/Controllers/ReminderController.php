@@ -15,7 +15,12 @@ class ReminderController extends Controller
 {
     public function index()
     {
-   
+        $reminderEvents = Reminder::forCurrentUser()->map(function ($reminder) {
+            return [
+                'title' => $reminder->reminder,
+                'start' => $reminder->date . 'T' . $reminder->time,
+            ];
+        })->values();
 
         $now = Carbon::now('Asia/Colombo')->toDateTimeString();
 
@@ -28,7 +33,7 @@ class ReminderController extends Controller
 
         // dd($reminders );
 
-        return view('reminders', compact('reminders'));
+        return view('reminders', compact('reminders','reminderEvents'));
     }
 
 
@@ -98,6 +103,10 @@ class ReminderController extends Controller
 
     public function store(Request $request)
     {
+
+
+
+
         $request->validate([
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required',
@@ -151,10 +160,10 @@ class ReminderController extends Controller
     . " at " 
     . $request->time;
 
-    SendReminderSms::dispatch(
-        "94713545642",
-        $smsMessage
-    )->delay($scheduleTime2);
+    // SendReminderSms::dispatch(
+    //     "94713545642",
+    //     $smsMessage
+    // )->delay($scheduleTime2);
 
         return redirect()->route('reminders.index')
             ->with('success', 'Reminder added successfully!');
