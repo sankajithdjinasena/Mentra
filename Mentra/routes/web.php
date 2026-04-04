@@ -34,7 +34,11 @@ Route::view('/home-in-dev-static', 'home-in-dev-static')->name('home.in.dev.stat
 
 
 Route::get('/sleepredict', [App\Http\Controllers\PredictController::class, 'index'])->name('sleepredict');
-Route::post('/sleepredict_result', [App\Http\Controllers\PredictController::class, 'predict'])->name('sleepredict_result');
+// Route::post('/sleepredict_result', [App\Http\Controllers\PredictController::class, 'predict'])->name('sleepredict_result');
+
+Route::post('/sleepredict_result', [App\Http\Controllers\StudyInfoController::class, 'predict'])->name('sleepredict_result');
+
+
 
 Route::get('/youtube-form', function () {
     return view('youtube_form');
