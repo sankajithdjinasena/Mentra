@@ -86,7 +86,7 @@
                                 @endforeach
                             </select>
                         </div>
-
+                        <p>Use average values for the following metrics:</p>
                         <div class="col-md-4 mb-3">
                             <label class="form-label">Heart Rate (bpm)</label>
                             <input type="number" name="heart_rate" class="form-control" value="{{ $profile->heart_rate ?? '' }}" required>
