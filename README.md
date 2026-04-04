@@ -1,134 +1,139 @@
-# 🌿 Mentra – AI-Powered Study Companion
+# 🌿 Mentra -- AI-Powered Study Companion
 
-**Mentra** is an intelligent EdTech platform designed to help students learn smarter, stay focused, and achieve their academic goals. By combining productivity tools, AI-driven assistance, and gamification, Mentra creates a personalized and engaging learning experience.
+> **Learn smarter. Stay focused. Achieve more.**
 
----
+**Mentra** is an AI-powered EdTech platform built to help students
+improve productivity, maintain focus, and enhance well-being through
+intelligent insights, smart tracking, and gamified learning.
 
-## 📌 Problem Statement
+------------------------------------------------------------------------
 
-Students often struggle with:
+## 🚀 Overview
 
-* Poor time management and lack of structured study plans
-* Low motivation and procrastination
-* Limited access to personalized academic support
-* Difficulty tracking progress and maintaining consistency
-* Lack of interactive and engaging learning environments
+Mentra combines **Artificial Intelligence, productivity tools, and
+wellness tracking** into a single platform to support students in
+managing their academic life effectively.
 
-Traditional learning tools fail to provide real-time assistance, personalization, and motivation needed for modern students.
+It goes beyond traditional study tools by offering **personalized
+recommendations, mental wellness insights, and community-driven
+learning**.
 
----
+------------------------------------------------------------------------
 
-## 💡 Proposed Solution
+## ❗ Problem
 
-**Mentra** addresses these challenges by offering:
+Students today face:
 
-* 🧠 **AI-Powered Learning Assistant** – Provides personalized study guidance and motivation
-* ⏱️ **Smart Study Tracking** – Logs study time and generates progress reports
-* 📋 **Task & Goal Management** – Helps organize and prioritize study tasks
-* 🔔 **Automated Reminders** – Keeps students on track with email notifications
-* 💬 **Community Q&A Platform** – Enables peer-to-peer learning and discussion
-* 🎯 **Gamification System** – Rewards consistency with points, badges, and leaderboards
-* 🎶 **Focus-Based Recommendations** – Suggests music/content to improve concentration
-* 😴 **Wellness Insights** – Sleep and study habit suggestions for better productivity
+-   ⏳ Poor time management and lack of structured study plans\
+-   😴 Low motivation, burnout, and procrastination\
+-   🎯 Lack of personalized academic support\
+-   📉 Difficulty tracking progress and consistency\
+-   🤝 Limited collaboration and engaging learning environments
 
----
+------------------------------------------------------------------------
 
-## 👥 Team Details
+## 💡 Solution
 
-**Project Name:** Mentra
-**Domain:** Education Technology (EdTech) & Generative AI
-**Team Name:** Predictra
-**Team Members:**
+Mentra solves these problems with an intelligent ecosystem:
 
-* Sankajith D. Jinasena
-* P.M.Sanodya V. Jinadasa
-* S. Nasmath Leen
-* T. Kugashanth
+-   🤖 **AI Learning Assistant** -- Personalized study guidance &
+    motivation\
+-   ⏱️ **Smart Study Tracker** -- Monitor time, habits, and
+    productivity\
+-   📋 **Task & Goal Manager** -- Organize and prioritize effectively\
+-   🔔 **Automated Reminders** -- Email & SMS notifications\
+-   💬 **Community Platform** -- Peer-to-peer learning and discussions\
+-   🧠 **Sentiment Analysis** -- Understand emotions via content (e.g.,
+    YouTube)\
+-   😴 **Sleep Prediction System** -- AI-based wellness insights\
+-   🎯 **Gamification** -- Points, badges, streaks, leaderboards\
+-   🎶 **Focus Enhancements** -- Music/content recommendations\
+-   📊 **Analytics Dashboard** -- Visualize progress and trends
 
-**University:**
+------------------------------------------------------------------------
 
-* Sabaragamuwa University of Sri Lanka
+## 🏗️ System Architecture
 
----
+Frontend (Blade + Bootstrap)\
+↓\
+Laravel Backend (Business Logic & APIs)\
+↓\
+MySQL Database\
+↓\
+Flask AI Service (ML Models & AI Processing)
 
-## 🛠️ Technology Stack
+------------------------------------------------------------------------
 
-### 🔹 Backend
-
-* Laravel (PHP)
+## 🛠️ Tech Stack
 
 ### 🔹 Frontend
 
-* HTML, CSS, JavaScript
-* Blade Template Engine
-* Bootstrap
+-   HTML, CSS, JavaScript\
+-   Bootstrap\
+-   Blade Template Engine
 
-### 🔹 AI Integration
+### 🔹 Backend
 
-* Python (Flask)
-* OpenAI API
+-   Laravel (PHP)\
+-   Flask (Python API Service)
+
+### 🔹 AI / Machine Learning
+
+-   Scikit-learn\
+-   Pandas, NumPy\
+-   NLP & Sentiment Analysis
 
 ### 🔹 Database
 
-* MySQL
+-   MySQL
 
-### 🔹 Additional Tools
+### 🔹 Tools & Services
 
-* Chart.js (data visualization)
-* Font Awesome (UI icons)
-* Mail Notifications (email reminders)
+-   Chart.js (visualization)\
+-   OpenAI API (AI assistant)\
+-   SMTP / Mail API (notifications)\
+-   YouTube API (data analysis)
 
----
+------------------------------------------------------------------------
 
-## 🏗️ Architecture Overview
+## ✨ Core Features
 
-```
-User Interface (Blade + Bootstrap)
-           ↓
-Laravel Backend (API + Logic)
-           ↓
-MySQL Database
-           ↓
-Flask AI Service (OpenAI Integration)
-```
+-   ✅ Task & To-Do Management\
+-   ⏰ Study Time Logging\
+-   📊 Productivity Analytics Dashboard\
+-   🔔 Email & SMS Reminders\
+-   🤖 AI Chatbot Assistant\
+-   💬 Community Q&A Forum\
+-   🥇 Gamification System\
+-   🎶 Focus & Study Recommendations\
+-   😴 Sleep Prediction & Insights\
+-   📚 Resource Discovery\
+-   📩 Feedback System
 
-* **Laravel** handles authentication, task management, and system logic
-* **Flask AI service** processes intelligent responses and recommendations
-* **MySQL** stores user data, progress, and activities
-* Communication between Laravel and Flask is done via API calls
+------------------------------------------------------------------------
 
----
+## 🧪 Testing
 
-## ✨ Key Features
+-   ✔️ Unit Testing -- Individual modules\
+-   ✔️ Integration Testing -- Laravel ↔ Flask APIs\
+-   ✔️ System Testing -- End-to-end workflows\
+-   ✔️ Usability Testing -- User experience feedback\
+-   ✔️ Performance Testing -- API efficiency & response time
 
-* ✅ To-Do Task Manager
-* ⏰ Study Time Logging & Analytics
-* 🔔 Email Reminders
-* 🤖 AI Motivation System
-* 💬 Community Q&A
-* 🧠 Chatbot Assistant
-* 🥇 Leaderboard & Rewards
-* 🎶 Smart Focus Media
-* 📚 Study Resources
-* 😴 Sleep Insights
-* 📩 Feedback System
+------------------------------------------------------------------------
 
----
+## ⚙️ Installation Guide
 
-## 🚀 Getting Started
+### 📥 Clone Repository
 
-### 📦 Clone the Repository
-
-```bash
+``` bash
 git clone https://github.com/sankajithdjinasena/Mentra.git
-cd mentra
+cd Mentra
 ```
 
----
+### 🔧 Backend Setup (Laravel)
 
-### ⚙️ Laravel Setup
-
-```bash
+``` bash
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -136,18 +141,81 @@ php artisan migrate
 php artisan serve
 ```
 
----
+### 🤖 AI Service Setup (Flask)
 
-### 🔐 Environment Configuration
+``` bash
+cd flask
+pip install -r requirements.txt
+python app.py
+```
 
-Update the `.env` file with:
+------------------------------------------------------------------------
 
-* Database credentials
-* Mail configuration
+## 🔐 Environment Configuration
 
----
+Update `.env` file with:
 
-## 📩 Feedback
+-   Database credentials\
+-   Mail configuration\
+-   API keys (Dialogflow, YouTube, infobip)
 
-We welcome your suggestions to improve Mentra!
-Feel free to submit feedback through the platform.
+------------------------------------------------------------------------
+
+## 💻 System Requirements
+
+### Minimum:
+
+-   Core i3, 4GB RAM\
+-   PHP 8+, Python 3.x\
+-   MySQL Server
+
+### Recommended:
+
+-   Core i5+, 8GB RAM, SSD
+
+------------------------------------------------------------------------
+
+## 🔮 Future Enhancements
+
+-   🧠 Advanced mental health analysis (emotion detection)\
+-   ⏳ Pomodoro-based focus session tracker\
+-   🌍 Multi-language support\
+-   📱 Mobile application\
+-   📡 Real-time collaboration features
+
+------------------------------------------------------------------------
+
+## 👥 Team -- Predictra
+
+-   Sankajith D. Jinasena\
+-   P.M. Sanodya V. Jinadasa\
+-   S. Nasmath Leen\
+-   T. Kugashanth
+
+Sabaragamuwa University of Sri Lanka
+
+------------------------------------------------------------------------
+
+## 📈 Project Outcome
+
+-   ✅ Fully functional AI-powered productivity platform\
+-   ✅ Successful ML model integration (sleep prediction & sentiment
+    analysis)\
+-   ✅ Interactive dashboard & community system\
+-   ✅ Seamless Laravel + Flask integration
+
+------------------------------------------------------------------------
+
+## 📩 Feedback & Contributions
+
+We welcome feedback, ideas, and contributions!
+
+------------------------------------------------------------------------
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
+
+------------------------------------------------------------------------
+
+> "Consistency beats motivation. Mentra helps you build both."
