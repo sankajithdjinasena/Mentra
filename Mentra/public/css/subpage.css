@@ -126,17 +126,6 @@ tr:nth-child(even) {
     color: white;
 }
 
-#start {
-    background-color: #3f9610;
-}
-
-#stop {
-    background-color: #3498db;
-}
-
-#reset {
-    background-color: #e74c3c;
-}
 
 
 
@@ -295,3 +284,447 @@ button:hover {
     transform: scale(3.5);
     cursor: pointer;
 }
+
+
+
+/* Unit Design */
+
+
+        .todo-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .todo-card {
+            min-height: 50px;
+            border: 1px solid #cde9ce;
+            border-radius: 16px;
+            padding: 14px;
+            background: var(--surface-soft);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .todo-card.active {
+            box-shadow: 0 8px 22px rgba(4, 53, 4, 0.12);
+        }
+
+        .todo-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            min-width: 220px;
+            gap: 10px;
+        }
+
+        .todo-card h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .todo-card small {
+            color: var(--text-muted);
+        }
+
+        .todo-actions {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            margin-top: 0;
+            justify-content: flex-end;
+        }
+
+        .action-pill {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: "Lato", sans-serif;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .action-pill:hover {
+            background: #ebf8ec;
+        }
+
+        .action-pill.primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .action-pill.primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .action-pill.todo-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 12px;
+        }
+
+        .action-pill.todo-pill svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .todo-check {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .todo-delete-form {
+            display: inline-flex;
+            margin: 0;
+        }
+
+        .todo-delete-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid #d46b6b;
+            background: #fff0f0;
+            color: #d46b6b;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s ease;
+            padding: 3px;
+        }
+
+        .todo-delete-btn:hover {
+            background: #d46b6b;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .todo-delete-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .todo-empty {
+            color: var(--text-muted);
+            padding: 8px 2px;
+        }
+
+        .todo-card.add {
+            border-style: dashed;
+            background: #f0fff1;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--dark);
+            flex-direction: column;
+            min-height: 80px;
+            gap: 8px;
+        }
+
+        .todo-card.add .plus {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+            line-height: 1;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .todo-card.add strong {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .todo-expand {
+            display: none;
+            width: 100%;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed #b7deb9;
+        }
+
+        .todo-expand-row {
+            width: 100%;
+        }
+
+        .todo-expand-row + .todo-expand-row {
+            margin-top: 10px;
+        }
+
+        .todo-timer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+            font-weight: 800;
+            flex-wrap: wrap;
+        }
+
+        .timer span {
+            background: #ebf8ec;
+            border: 1px solid #cde9ce;
+            border-radius: 10px;
+            padding: 10px 12px;
+            min-width: 54px;
+            text-align: center;
+        }
+
+        .timer .timer-label {
+            color: var(--text-muted);
+            border: 0px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-left: -2px;
+            margin-right: 4px;
+            background: transparent;
+        }
+
+        .timer-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .timer-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid var(--primary);
+            background: #ebf8ec;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.08);
+            padding: 3px;
+        }
+
+        .timer-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .timer-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .timer-btn.stop {
+            border-color: #d46b6b;
+            background: #fff0f0;
+            color: #d46b6b;
+        }
+
+        .timer-btn.stop:hover {
+            background: #d46b6b;
+            color: #fff;
+        }
+
+        .timer-btn.reset {
+            border-color: #6c757d;
+            background: #f4f6f8;
+            color: #6c757d;
+        }
+
+        .timer-btn.reset:hover {
+            background: #6c757d;
+            color: #fff;
+        }
+
+        .music-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .music-select {
+            width: 100%;
+            border: 1px solid #b8dcba;
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            font-family: "Nunito", sans-serif;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .spotify-embed {
+            width: 100%;
+            border: 0;
+            border-radius: 12px;
+        }
+
+        .todo-card.active .todo-expand {
+            display: block;
+        }
+
+
+        #remindersCalendar {
+            min-height: 540px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        /* FullCalendar color theme (keeps current sizing/borders) */
+        #remindersCalendar .fc {
+            --fc-border-color: #d9efd9;
+            --fc-page-bg-color: #ffffff;
+            --fc-neutral-bg-color: #f3fbf3;
+            --fc-neutral-text-color: #2f5a2f;
+            --fc-today-bg-color: #eaf8ea;
+
+            --fc-event-bg-color: #28a745;
+            --fc-event-border-color: #1f8b3a;
+            --fc-event-text-color: #ffffff;
+
+            --fc-button-bg-color: #043504;
+            --fc-button-border-color: #043504;
+            --fc-button-hover-bg-color: #0a5a0a;
+            --fc-button-hover-border-color: #0a5a0a;
+            --fc-button-active-bg-color: #28a745;
+            --fc-button-active-border-color: #28a745;
+        }
+
+        #remindersCalendar .fc-toolbar-title {
+            color: #043504;
+            font-family: "Merienda", serif;
+        }
+
+        #remindersCalendar .fc-col-header-cell-cushion,
+        #remindersCalendar .fc-daygrid-day-number,
+        #remindersCalendar .fc-timegrid-axis-cushion,
+        #remindersCalendar .fc-timegrid-slot-label-cushion {
+            color: #1f4d1f;
+            text-decoration: none;
+        }
+
+        #remindersCalendar .fc-col-header-cell {
+            background: #0a5a0a;
+        }
+
+        #remindersCalendar .fc-col-header-cell .fc-col-header-cell-cushion {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        #remindersCalendar .fc-daygrid-day.fc-day-today {
+            box-shadow: inset 0 0 0 2px #bfe6bf;
+        }
+
+        #remindersCalendar .fc-event {
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+
+                .reminder-form-wrap {
+            margin-top: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f8fff8;
+            padding: 14px;
+        }
+
+        .reminder-form-wrap h3 {
+            margin: 0 0 10px;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+
+        .reminder-form-grid {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .reminder-form-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        .reminder-form-grid label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .reminder-form-grid input {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            outline: none;
+        }
+
+        .reminder-form-grid input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+        }
+
+        .reminder-errors {
+            margin-top: 8px;
+            color: #b42318;
+            font-size: 0.92rem;
+        }
+
+        .reminder-submit {
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: var(--dark);
+            color: #fff;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .reminder-submit:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 900px) {
+            .reminder-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }

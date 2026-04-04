@@ -46,7 +46,7 @@ Route::get('/youtube-form', function () {
 
 Route::post('/analyze-youtube', [YouTubeAnalysisController::class, 'analyze'])->name('analyze.youtube');
 
-Route::get('/todolist', [TodolistController::class, 'index'])->name('todolist.index');
+Route::get('/todolist', [TodolistController::class, 'index'])->middleware('auth')->name('todolist.index');
 Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index');
 Route::get('/studyinfo', [StudyInfoController::class, 'index'])->name('studyinfo.index');
 Route::get('/music', [MusicController::class, 'index'])->name('music.index');

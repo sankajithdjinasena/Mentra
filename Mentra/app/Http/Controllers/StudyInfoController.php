@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Badge;
 use DB;
+use App\Models\Reminder;
 use App\Models\Profile;
 use App\Models\Study_info;
+use App\Models\Todolist;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -12,8 +14,18 @@ use Illuminate\Support\Facades\Http;
 
 class StudyInfoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $date = $request->input('date', now()->toDateString());
+
+        $todolists = Todolist::where('user_id', Auth::id())
+            ->whereDate('date', $date)
+            ->with(['listTodos' => function ($query) {
+                $query->where('status', 1);
+            }])
+            ->where('status', '1')
+            ->get();
+
         $userId = Auth::id();
         $startOfMonth = now()->startOfMonth()->toDateString();
         $endOfMonth = now()->endOfMonth()->toDateString();
@@ -25,12 +37,18 @@ class StudyInfoController extends Controller
             ->keyBy('date');
 
         $dates = collect();
-        for ($date = now()->startOfMonth(); $date <= now()->endOfMonth(); $date->addDay()) {
-            $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
+        for ($day = now()->startOfMonth(); $day <= now()->endOfMonth(); $day->addDay()) {
+            $dates->put($day->toDateString(), $studyInfos[$day->toDateString()]->hours ?? 0);
         }
 
-        // return view('studyinfo', compact('dates'));
-        return view('todolist', compact('dates'));
+        $reminderEvents = Reminder::forCurrentUser()->map(function ($reminder) {
+            return [
+                'title' => $reminder->reminder,
+                'start' => $reminder->date . 'T' . $reminder->time,
+            ];
+        })->values();
+
+        return view('todolist', compact('todolists', 'date', 'dates', 'reminderEvents'));
     }
 
 
@@ -109,7 +127,7 @@ class StudyInfoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hours' => 'required|numeric|min:0.1',
+            'hours' => 'required|numeric',
             'date' => 'required|date',
         ]);
 

@@ -406,34 +406,6 @@
                 linear-gradient(135deg, rgba(40, 167, 69, 0.14), rgba(4, 53, 4, 0.06));
         }
 
-        .badges {
-            margin-top: 14px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .badge-item {
-            border-radius: 10px;
-            border: 1px solid #cae6cc;
-            background: #f2fbf2;
-            text-align: center;
-            padding: 10px 8px;
-            font-weight: 700;
-            color: var(--dark);
-            font-size: 0.86rem;
-        }
-
-        @media (max-width: 880px) {
-            .stats-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .topbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
     </style>
 
 <section class="container sec">

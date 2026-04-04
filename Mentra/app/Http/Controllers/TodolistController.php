@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\List_todo;
+use App\Models\Reminder;
 use App\Models\Study_info;
 use App\Models\Todolist;
 use Auth;
@@ -12,6 +13,7 @@ class TodolistController extends Controller
 {
     public function index(Request $request)
     {
+
         $date = $request->input('date', now()->toDateString());
         $todolists = Todolist::where('user_id', Auth::id())
             ->whereDate('date', $date)
@@ -21,6 +23,7 @@ class TodolistController extends Controller
             ->where('status', '1')
             ->get();
 
+        logger()->info('todo payload', $todolists->all());
 
              $userId = Auth::id();
         $startOfMonth = now()->startOfMonth()->toDateString();
@@ -33,14 +36,23 @@ class TodolistController extends Controller
             ->keyBy('date');
 
         $dates = collect();
-        for ($date = now()->startOfMonth(); $date <= now()->endOfMonth(); $date->addDay()) {
-            $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
+        for ($date_val = now()->startOfMonth(); $date_val <= now()->endOfMonth(); $date_val->addDay()) {
+            $dates->put($date_val->toDateString(), $studyInfos[$date_val->toDateString()]->hours ?? 0);
         }
-        return view('todolist', compact('todolists', 'date','dates'));
+
+        $reminderEvents = Reminder::forCurrentUser()->map(function ($reminder) {
+            return [
+                'title' => $reminder->reminder,
+                'start' => $reminder->date . 'T' . $reminder->time,
+            ];
+        })->values();
+
+        return view('todolist', compact('todolists', 'date', 'dates', 'reminderEvents'));
     }
 
     public function store(Request $request)
     {
+        logger()->info('todo store payload', $request->all());
         $request->validate([
             'date' => 'required|date',
             'todos.*' => 'required|string|max:255',

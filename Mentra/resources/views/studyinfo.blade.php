@@ -4,13 +4,12 @@
     <title>Mentra | Study Info</title>
 
     <link rel="stylesheet" href="{{ asset('css/subpage.css') }}">
- 
-    <section class="container sec">
+    
         <h2 class="mb-4">Log Your Study Hours</h2>
 
         <div class="content-wrapper row wow fadeInDown">
             <!-- Clock Section -->
-            <div class="clock-section col-md-6">
+            <!-- <div class="clock-section col-md-6">
                 <div id="time">
                     <span class="digit" id="hr">00</span>
                     <span class="txt">Hr</span>
@@ -25,10 +24,10 @@
                     <button class="btn" id="stop">Stop</button>
                     <button class="btn" id="reset">Reset</button>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Study Log Section -->
-            <div class="study-section col-md-6">
+            <!-- <div class="study-section col-md-6">
                 <form action="{{ route('studyinfo.store') }}" method="POST">
                     @csrf
                     <label>Date:</label>
@@ -41,7 +40,7 @@
 
                     <button type="submit">Save Study Info</button>
                 </form>
-            </div>
+            </div> -->
             <h3 class="mt-5">Your Study Logs for {{ now()->format('F Y') }}</h3>
             <canvas id="studyChart"></canvas>
         </div>

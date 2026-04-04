@@ -111,6 +111,12 @@ class ReminderController extends Controller
             'reminder' => $request->reminder
         ]);
 
+        $reminderTime = Carbon::createFromFormat(
+            'Y-m-d H:i',
+            "{$request->date} {$request->time}",
+            'Asia/Colombo'
+        );
+
       
     
         $reminderTime = Carbon::createFromFormat('Y-m-d H:i', "{$request->date} {$request->time}", 'Asia/Colombo');
