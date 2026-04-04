@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Badge;
 use DB;
+use App\Models\Profile;
 use App\Models\Study_info;
 use Auth;
 use Illuminate\Http\Request;
@@ -269,10 +270,119 @@ class StudyInfoController extends Controller
             ->groupBy('badges.badge_name')
             ->get();
 
-        return view('studyprogress', compact('dateLabels', 'studyHours', 'monthLabels', 'monthlyHours', 'badges'));
+        $profile = Profile::where('user_id', Auth::id())->first();
+
+        return view('studyprogress', compact('dateLabels', 'studyHours', 'monthLabels', 'monthlyHours', 'badges','profile'));
     }
 
 
+
+    public function predict(Request $request)
+{
+
+
+ $userId = Auth::id();
+        $startOfMonth = now()->startOfMonth()->toDateString();
+        $endOfMonth = now()->endOfMonth()->toDateString();
+
+        $studyInfos = Study_info::where('user_id', $userId)
+            ->whereBetween('date', [$startOfMonth, $endOfMonth])
+            ->get()
+            ->keyBy('date');
+
+        $dates = collect();
+        for ($date = now()->startOfMonth(); $date <= now()->endOfMonth(); $date->addDay()) {
+            $dates->put($date->toDateString(), $studyInfos[$date->toDateString()]->hours ?? 0);
+        }
+
+        $dateLabels = $dates->keys()->toArray();
+        $studyHours = $dates->values()->toArray();
+
+        $monthlyProgress = Study_info::where('user_id', $userId)
+            ->selectRaw('MONTH(date) as month, SUM(hours) as total_hours')
+            ->whereYear('date', now()->year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->keyBy('month');
+
+        $monthLabels = collect(range(1, 12))->map(function ($month) {
+            return now()->startOfYear()->addMonths($month - 1)->format('F');
+        })->toArray();
+
+        $monthlyHours = collect(range(1, 12))->map(function ($month) use ($monthlyProgress) {
+            return $monthlyProgress[$month]->total_hours ?? 0;
+        })->toArray();
+
+        $badges = DB::table('user_badges')
+            ->join('badges', 'user_badges.badge_id', '=', 'badges.id')
+            ->where('user_badges.user_id', $userId)
+            ->select('badges.badge_name as badge_name', DB::raw('COUNT(user_badges.id) as earn_count'))
+            ->groupBy('badges.badge_name')
+            ->get();
+
+
+
+
+    $request->validate([
+        'Daily_Steps' => 'required|numeric'
+    ]);
+
+    $profile = Profile::where('user_id', Auth::id())->first();
+
+    if (!$profile) {
+        return back()->with('error', 'Profile not found');
+    }
+
+$data = [
+    'Age' => $profile->age,
+    'Heart_Rate' => $profile->heart_rate,
+    'Daily_Steps' => $request->Daily_Steps, // ONLY user input
+    'Quality_of_Sleep' => $profile->quality_of_sleep,
+    'Physical_Activity_Level' => $profile->physical_activity_level,
+    'Stress_Level' => $profile->stress_level,
+
+    'gender' => strtolower(trim($profile->gender)),
+
+    // convert "Normal Weight" → "normal_weight"
+    'bmi' => strtolower(trim(str_replace(' ', '_', $profile->bmi_category))),
+
+    'Systolic_BP' => $profile->systolic_bp,
+    'Diastolic_BP' => $profile->diastolic_bp,
+];
+
+$gender = $data['gender'];
+$bmi = $data['bmi'];
+
+$processedData = [
+    'Age' => (int) $data['Age'],
+    'Quality_of_Sleep' => (int) $data['Quality_of_Sleep'],
+    'Physical_Activity_Level' => (int) $data['Physical_Activity_Level'],
+    'Stress_Level' => (int) $data['Stress_Level'],
+    'Heart_Rate' => (int) $data['Heart_Rate'],
+    'Daily_Steps' => (int) $data['Daily_Steps'],
+
+    'Gender_Female' => $gender === 'female' ? 1 : 0,
+    'Gender_Male' => $gender === 'male' ? 1 : 0,
+
+    'BMI_Normal' => $bmi === 'normal' ? 1 : 0,
+    'BMI_Normal_Weight' => $bmi === 'normal_weight' ? 1 : 0,
+    'BMI_Obese' => $bmi === 'obese' ? 1 : 0,
+    'BMI_Overweight' => $bmi === 'overweight' ? 1 : 0,
+
+    'Systolic_BP' => (int) $data['Systolic_BP'],
+    'Diastolic_BP' => (int) $data['Diastolic_BP'],
+];
+
+
+
+    $response = Http::timeout(120)->post('http://127.0.0.1:5001/predictsleepDuration', $processedData);
+dd($response);
+    $predictedSleepDuration = $response->json()['prediction'] ?? 0;
+  
+
+    return view('studyprogress', compact('dateLabels', 'studyHours', 'monthLabels', 'monthlyHours', 'badges','predictedSleepDuration', 'profile'));
+}
 
 
 

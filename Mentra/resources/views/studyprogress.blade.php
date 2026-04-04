@@ -34,6 +34,33 @@
         </div>
 
 
+        @if($profile)
+    <form action="{{ route('sleepredict_result') }}" method="POST">
+        @csrf
+
+        <div class="text-center mt-5">
+            <label for="daily_steps">Daily Steps</label>
+            <input type="number" name="Daily_Steps" class="form-control w-25 mx-auto" required>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit">Check Sleep</button>
+        </div>
+    </form>
+@else
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Profile Required',
+            text: 'Please complete your profile first!',
+            confirmButtonText: 'Go to Profile'
+        }).then(() => {
+            window.location.href = "{{ route('profile.edit') }}";
+        });
+    </script>
+@endif
+
+
         <div class="mt-5">
             <h3 class="text-center">🏅 Badges Earned</h3>
             <div class="row mt-4">
