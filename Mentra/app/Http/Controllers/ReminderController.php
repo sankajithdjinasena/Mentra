@@ -160,10 +160,10 @@ class ReminderController extends Controller
     . " at " 
     . $request->time;
 
-    // SendReminderSms::dispatch(
-    //     "94713545642",
-    //     $smsMessage
-    // )->delay($scheduleTime2);
+    SendReminderSms::dispatch(
+        "94713545642",
+        $smsMessage
+    )->delay($scheduleTime2);
 
         return redirect()->route('reminders.index')
             ->with('success', 'Reminder added successfully!');

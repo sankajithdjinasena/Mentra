@@ -75,5 +75,34 @@
             @endforeach
         </div>
     </div>
+
+    <hr class="my-5 opacity-25">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">🎯 Study Challenges</h2>
+        <p class="text-muted">Push your limits and earn badges</p>
+    </div>
+
+    <div class="row">
+        @foreach ($challenges as $challenge)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm challenge-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-soft-info text-info border border-info badge-type">
+                                {{ $challenge->type }}
+                            </span>
+                        </div>
+                        <h5 class="fw-bold mb-3">{{ $challenge->name }}</h5>
+                        <p class="text-muted small flex-grow-1">
+                            {{ $challenge->description }}
+                        </p>
+                        <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>
 @endsection

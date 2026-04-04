@@ -89,15 +89,15 @@
                         <a class="nav-link {{ request()->routeIs('/') ? 'active' : '' }}"
                             href="{{ route('/') }}">Home</a>
                     </li>
-
+<!-- 
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('studyinfo.index') ? 'active' : '' }}"
                             href="{{ route('studyinfo.index') }}">Start Study</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('todolist.index') ? 'active' : '' }}"
-                            href="{{ route('todolist.index') }}">To do list</a>
+                            href="{{ route('todolist.index') }}">Start Study</a>
                     </li>
 
                     <li class="nav-item">
