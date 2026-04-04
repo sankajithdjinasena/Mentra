@@ -324,10 +324,6 @@ class StudyInfoController extends Controller
 
 
 
-    $request->validate([
-        'Daily_Steps' => 'required|numeric'
-    ]);
-
     $profile = Profile::where('user_id', Auth::id())->first();
 
     if (!$profile) {
@@ -337,7 +333,7 @@ class StudyInfoController extends Controller
 $data = [
     'Age' => $profile->age,
     'Heart_Rate' => $profile->heart_rate,
-    'Daily_Steps' => $request->Daily_Steps, // ONLY user input
+    'Daily_Steps' => $profile->daily_steps, 
     'Quality_of_Sleep' => $profile->quality_of_sleep,
     'Physical_Activity_Level' => $profile->physical_activity_level,
     'Stress_Level' => $profile->stress_level,
@@ -377,9 +373,8 @@ $processedData = [
 
 
     $response = Http::timeout(120)->post('http://127.0.0.1:5001/predictsleepDuration', $processedData);
-dd($response);
-    $predictedSleepDuration = $response->json()['prediction'] ?? 0;
-  
+   
+   $predictedSleepDuration = $response->json()['predicted_sleep_duration'] ?? 0;
 
     return view('studyprogress', compact('dateLabels', 'studyHours', 'monthLabels', 'monthlyHours', 'badges','predictedSleepDuration', 'profile'));
 }

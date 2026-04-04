@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -43,6 +44,7 @@ class ProfileController extends Controller
             'physical_activity_level' => 'nullable|integer',
             'stress_level' => 'nullable|integer|between:1,10',
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'daily_steps' => 'nullable|integer',
         ]);
 
 
