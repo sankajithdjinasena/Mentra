@@ -24,10 +24,10 @@ learning**.
 
 Students today face:
 
--   ⏳ Poor time management and lack of structured study plans\
--   😴 Low motivation, burnout, and procrastination\
--   🎯 Lack of personalized academic support\
--   📉 Difficulty tracking progress and consistency\
+-   ⏳ Poor time management and lack of structured study plans
+-   😴 Low motivation, burnout, and procrastination
+-   🎯 Lack of personalized academic support
+-   📉 Difficulty tracking progress and consistency
 -   🤝 Limited collaboration and engaging learning environments
 
 ------------------------------------------------------------------------
@@ -37,29 +37,29 @@ Students today face:
 Mentra solves these problems with an intelligent ecosystem:
 
 -   🤖 **AI Learning Assistant** -- Personalized study guidance &
-    motivation\
+    motivation
 -   ⏱️ **Smart Study Tracker** -- Monitor time, habits, and
-    productivity\
--   📋 **Task & Goal Manager** -- Organize and prioritize effectively\
--   🔔 **Automated Reminders** -- Email & SMS notifications\
--   💬 **Community Platform** -- Peer-to-peer learning and discussions\
+    productivity
+-   📋 **Task & Goal Manager** -- Organize and prioritize effectively
+-   🔔 **Automated Reminders** -- Email & SMS notifications
+-   💬 **Community Platform** -- Peer-to-peer learning and discussions
 -   🧠 **Sentiment Analysis** -- Understand emotions via content (e.g.,
-    YouTube)\
--   😴 **Sleep Prediction System** -- AI-based wellness insights\
--   🎯 **Gamification** -- Points, badges, streaks, leaderboards\
--   🎶 **Focus Enhancements** -- Music/content recommendations\
+    YouTube)
+-   😴 **Sleep Prediction System** -- AI-based wellness insights
+-   🎯 **Gamification** -- Points, badges, streaks, leaderboards
+-   🎶 **Focus Enhancements** -- Music/content recommendations
 -   📊 **Analytics Dashboard** -- Visualize progress and trends
 
 ------------------------------------------------------------------------
 
 ## 🏗️ System Architecture
 
-Frontend (Blade + Bootstrap)\
-↓\
-Laravel Backend (Business Logic & APIs)\
-↓\
-MySQL Database\
-↓\
+Frontend (Blade + Bootstrap)
+↓
+Laravel Backend (Business Logic & APIs)
+↓
+MySQL Database
+↓
 Flask AI Service (ML Models & AI Processing)
 
 ------------------------------------------------------------------------
@@ -68,19 +68,19 @@ Flask AI Service (ML Models & AI Processing)
 
 ### 🔹 Frontend
 
--   HTML, CSS, JavaScript\
--   Bootstrap\
+-   HTML, CSS, JavaScript
+-   Bootstrap
 -   Blade Template Engine
 
 ### 🔹 Backend
 
--   Laravel (PHP)\
+-   Laravel (PHP)
 -   Flask (Python API Service)
 
 ### 🔹 AI / Machine Learning
 
--   Scikit-learn\
--   Pandas, NumPy\
+-   Scikit-learn
+-   Pandas, NumPy
 -   NLP & Sentiment Analysis
 
 ### 🔹 Database
@@ -89,35 +89,35 @@ Flask AI Service (ML Models & AI Processing)
 
 ### 🔹 Tools & Services
 
--   Chart.js (visualization)\
--   OpenAI API (AI assistant)\
--   SMTP / Mail API (notifications)\
+-   Chart.js (visualization)
+-   OpenAI API (AI assistant)
+-   SMTP / Mail API (notifications)
 -   YouTube API (data analysis)
 
 ------------------------------------------------------------------------
 
 ## ✨ Core Features
 
--   ✅ Task & To-Do Management\
--   ⏰ Study Time Logging\
--   📊 Productivity Analytics Dashboard\
--   🔔 Email & SMS Reminders\
--   🤖 AI Chatbot Assistant\
--   💬 Community Q&A Forum\
--   🥇 Gamification System\
--   🎶 Focus & Study Recommendations\
--   😴 Sleep Prediction & Insights\
--   📚 Resource Discovery\
+-   ✅ Task & To-Do Management
+-   ⏰ Study Time Logging
+-   📊 Productivity Analytics Dashboard
+-   🔔 Email & SMS Reminders
+-   🤖 AI Chatbot Assistant
+-   💬 Community Q&A Forum
+-   🥇 Gamification System
+-   🎶 Focus & Study Recommendations
+-   😴 Sleep Prediction & Insights
+-   📚 Resource Discovery
 -   📩 Feedback System
 
 ------------------------------------------------------------------------
 
 ## 🧪 Testing
 
--   ✔️ Unit Testing -- Individual modules\
--   ✔️ Integration Testing -- Laravel ↔ Flask APIs\
--   ✔️ System Testing -- End-to-end workflows\
--   ✔️ Usability Testing -- User experience feedback\
+-   ✔️ Unit Testing -- Individual modules
+-   ✔️ Integration Testing -- Laravel ↔ Flask APIs
+-   ✔️ System Testing -- End-to-end workflows
+-   ✔️ Usability Testing -- User experience feedback
 -   ✔️ Performance Testing -- API efficiency & response time
 
 ------------------------------------------------------------------------
@@ -155,8 +155,8 @@ python app.py
 
 Update `.env` file with:
 
--   Database credentials\
--   Mail configuration\
+-   Database credentials
+-   Mail configuration
 -   API keys (Dialogflow, YouTube, infobip)
 
 ------------------------------------------------------------------------
@@ -165,8 +165,8 @@ Update `.env` file with:
 
 ### Minimum:
 
--   Core i3, 4GB RAM\
--   PHP 8+, Python 3.x\
+-   Core i3, 4GB RAM
+-   PHP 8+, Python 3.x
 -   MySQL Server
 
 ### Recommended:
@@ -177,19 +177,19 @@ Update `.env` file with:
 
 ## 🔮 Future Enhancements
 
--   🧠 Advanced mental health analysis (emotion detection)\
--   ⏳ Pomodoro-based focus session tracker\
--   🌍 Multi-language support\
--   📱 Mobile application\
+-   🧠 Advanced mental health analysis (emotion detection)
+-   ⏳ Pomodoro-based focus session tracker
+-   🌍 Multi-language support
+-   📱 Mobile application
 -   📡 Real-time collaboration features
 
 ------------------------------------------------------------------------
 
 ## 👥 Team -- Predictra
 
--   Sankajith D. Jinasena\
--   P.M. Sanodya V. Jinadasa\
--   S. Nasmath Leen\
+-   Sankajith D. Jinasena
+-   P.M. Sanodya V. Jinadasa
+-   S. Nasmath Leen
 -   T. Kugashanth
 
 Sabaragamuwa University of Sri Lanka
@@ -198,10 +198,10 @@ Sabaragamuwa University of Sri Lanka
 
 ## 📈 Project Outcome
 
--   ✅ Fully functional AI-powered productivity platform\
+-   ✅ Fully functional AI-powered productivity platform
 -   ✅ Successful ML model integration (sleep prediction & sentiment
-    analysis)\
--   ✅ Interactive dashboard & community system\
+    analysis)
+-   ✅ Interactive dashboard & community system
 -   ✅ Seamless Laravel + Flask integration
 
 ------------------------------------------------------------------------
@@ -209,12 +209,6 @@ Sabaragamuwa University of Sri Lanka
 ## 📩 Feedback & Contributions
 
 We welcome feedback, ideas, and contributions!
-
-------------------------------------------------------------------------
-
-## ⭐ Support
-
-If you like this project, consider giving it a ⭐ on GitHub!
 
 ------------------------------------------------------------------------
 
