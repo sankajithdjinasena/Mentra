@@ -157,45 +157,45 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 
-// Route::get('/test-sms', function () {
+Route::get('/test-sms', function () {
 
-//     $host = env('INFOBIP_BASE_URL');
-//     $apiKey = env('INFOBIP_API_KEY');
+    $host = env('INFOBIP_BASE_URL');
+    $apiKey = env('INFOBIP_API_KEY');
 
-//     try {
-//         $configuration = new \Infobip\Configuration(
-//             host: $host,
-//             apiKey: $apiKey
-//         );
+    try {
+        $configuration = new \Infobip\Configuration(
+            host: $host,
+            apiKey: $apiKey
+        );
 
-//         $smsApi = new \Infobip\Api\SmsApi(config: $configuration);
+        $smsApi = new \Infobip\Api\SmsApi(config: $configuration);
 
-//         $destination = new \Infobip\Model\SmsDestination(
-//             to: '94713545642'
-//         );
+        $destination = new \Infobip\Model\SmsDestination(
+            to: '94713545642'
+        );
 
-//         $message = new \Infobip\Model\SmsTextualMessage(
-//             destinations: [$destination],
-//             text: "Hello from Mentra!",
-//             from: "InfoSMS"
-//         );
+        $message = new \Infobip\Model\SmsTextualMessage(
+            destinations: [$destination],
+            text: "Hello from Mentra!",
+            from: "InfoSMS"
+        );
 
-//         $request = new \Infobip\Model\SmsAdvancedTextualRequest(
-//             messages: [$message]
-//         );
+        $request = new \Infobip\Model\SmsAdvancedTextualRequest(
+            messages: [$message]
+        );
 
-//         $response = $smsApi->sendSmsMessage($request);
+        $response = $smsApi->sendSmsMessage($request);
 
-//      $details = $response->getMessages()[0];
+     $details = $response->getMessages()[0];
 
-//      $messageId = $details->getMessageId();
+     $messageId = $details->getMessageId();
 
-// return [
-//     'messageId' => $messageId,
-//     'status' => $details->getStatus()->getName(),
-// ];
+return [
+    'messageId' => $messageId,
+    'status' => $details->getStatus()->getName(),
+];
 
-//     } catch (\Exception $e) {
-//         return "Final Error Check: " . $e->getMessage();
-//     }
-// });
+    } catch (\Exception $e) {
+        return "Final Error Check: " . $e->getMessage();
+    }
+});

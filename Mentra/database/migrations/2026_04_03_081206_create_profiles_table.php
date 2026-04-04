@@ -24,6 +24,7 @@ return new class extends Migration
         $table->integer('quality_of_sleep')->nullable(); // 1-10
         $table->integer('physical_activity_level')->nullable(); // 1-100
         $table->integer('stress_level')->nullable(); // 1-10
+        $table->integer('daily_steps')->nullable(); // hrs/day
         $table->timestamps();
     });
 }
