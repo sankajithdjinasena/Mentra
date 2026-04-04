@@ -34,6 +34,107 @@
         </div>
 
 
+        <!-- @if($profile)
+    <form action="{{ route('sleepredict_result') }}" method="POST">
+        @csrf
+
+        <div class="text-center mt-4">
+            <button type="submit">Check Sleep</button>
+        </div>
+    </form>
+
+    @if(isset($predictedSleepDuration))
+    @php
+        $hours = floor($predictedSleepDuration);
+        $minutes = round(($predictedSleepDuration - $hours) * 60);
+    @endphp
+
+    <div class="alert alert-success text-center mt-4 w-50 mx-auto">
+        <h4>😴 Predicted Sleep Duration</h4>
+        <h2>{{ $hours }} hrs {{ $minutes }} mins</h2>
+    </div>
+@endif
+@endif -->
+
+
+
+@if($profile)
+<div class="card border-0 shadow-lg p-4 rounded-4 mt-5 mb-5 bg-white overflow-hidden position-relative">
+    <div style="position: absolute; top: -20px; right: -20px; font-size: 100px; opacity: 0.05; transform: rotate(15deg);">😴</div>
+
+    <div class="row align-items-center">
+        <div class="col-md-12 text-start">
+            <h3 class="fw-bold mb-3 align-items-center" >
+                <span class="me-2">😴</span> Check Your Sleep Health
+            </h3>
+            <p class="text-muted fs-5" style="text-align: justify; padding:40px">
+                Your sleep directly affects your concentration, memory, and daily performance.
+                Check your predicted sleep duration and discover whether your body gets enough rest for better study success.
+            </p>
+        </div>
+        <div class="col-md-12 text-center">
+            <form action="{{ route('sleepredict_result') }}" method="POST">
+                @csrf
+                <button type="submit" style="width: fit-content;
+    margin: auto;">
+                    Predict My Sleep Duration
+                </button>
+            </form>
+        </div>
+
+
+    @if(isset($predictedSleepDuration))
+        @php
+            $hours = floor($predictedSleepDuration);
+            $minutes = round(($predictedSleepDuration - $hours) * 60);
+        @endphp
+
+      <div class="mt-4 animate-fade-in d-flex justify-content-center row">
+    <div class="p-4 rounded-4 text-center col-11 col-md-6 shadow-sm" 
+         style="background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%); border: 1px dashed #0d6efd;">
+        
+        <h6 class="text-uppercase fw-bold text-primary mb-2 small tracking-wider">
+            Your Personalized Forecast
+        </h6>
+        
+        <div class="display-5 fw-bold text-dark">
+            {{ $hours }}<span class="fs-4 fw-normal text-secondary">h</span> 
+            {{ $minutes }}<span class="fs-4 fw-normal text-secondary">m</span>
+        </div>
+        
+        <p class="text-muted mb-0 mt-2 small">
+            Recommended rest based on your current Health data.
+        </p>
+    </div>
+</div>
+    </div>
+    @endif
+</div>
+</div>
+<style>
+    /* Creative Styles */
+    .rounded-4 { border-radius: 1.25rem !important; }
+    .transition-all { transition: all 0.3s ease; }
+    .hover-grow:hover { 
+        transform: scale(1.05); 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .tracking-wider { letter-spacing: 1px; }
+    
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+@endif
+
+
+
+
         <div class="mt-5">
             <h3 class="text-center">🏅 Badges Earned</h3>
             <div class="row mt-4">

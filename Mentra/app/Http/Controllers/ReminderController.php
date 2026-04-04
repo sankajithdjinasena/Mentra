@@ -9,24 +9,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendReminderSms;
+use App\Jobs\SendReminderEmail;
 
 class ReminderController extends Controller
 {
     public function index()
     {
-        // $reminders = Reminder::where('user_id', Auth::id())
-        //     ->where(function ($query) {
-        //         $query->where('date', '>', now()->toDateString())
-        //             ->orWhere(function ($q) {
-        //                 $q->where('date', now()->toDateString())
-        //                   ->where('time', '>', now()->toTimeString());
-        //             });
-        //     })
-        //     ->where('status', '1')
-        //     ->orderBy('date')
-        //     ->orderBy('time')
-        //     ->get();
-
+   
 
         $now = Carbon::now('Asia/Colombo')->toDateTimeString();
 
@@ -41,6 +30,71 @@ class ReminderController extends Controller
 
         return view('reminders', compact('reminders'));
     }
+
+
+
+
+//     public function store(Request $request)
+// {
+//     $request->validate([
+//         'date' => 'required|date|after_or_equal:today',
+//         'time' => 'required',
+//         'reminder' => 'required|string|max:255'
+//     ]);
+
+//     $reminder = Reminder::create([
+//         'user_id' => Auth::id(),
+//         'date' => $request->date,
+//         'time' => $request->time,
+//         'reminder' => $request->reminder
+//     ]);
+
+//     // Combine date + time into a Carbon instance
+//     $reminderTime = Carbon::createFromFormat(
+//         'Y-m-d H:i',
+//         "{$request->date} {$request->time}",
+//         'Asia/Colombo'
+//     );
+
+//     // Use the exact reminder time (no manual diff needed)
+//     $scheduleTime = $reminderTime->isFuture() ? $reminderTime : now();
+
+//     /*
+//      |----------------------------------
+//      | EMAIL (scheduled at reminder time)
+//      |----------------------------------
+//     */
+//     Mail::to(Auth::user()->email)
+//         ->later($scheduleTime, new ReminderEmail($reminder));
+
+
+//         // SendReminderEmail::dispatch(
+//         //     $reminder,
+//         //     Auth::user()->email
+//         // )->delay($scheduleTime);
+//     /*
+//      |----------------------------------
+//      | SMS (same schedule time)
+//      |----------------------------------
+//     */
+//     // $smsMessage = "Reminder From Mentra: " 
+//     //     . $request->reminder 
+//     //     . " on " 
+//     //     . $request->date 
+//     //     . " at " 
+//     //     . $request->time;
+
+//     // SendReminderSms::dispatch(
+//     //     "+94713545642",
+//     //     $smsMessage
+//     // )->delay($scheduleTime);
+
+//     return redirect()->route('reminders.index')
+//         ->with('success', 'Reminder added successfully!');
+// }
+
+
+
 
     public function store(Request $request)
     {
@@ -63,27 +117,83 @@ class ReminderController extends Controller
             'Asia/Colombo'
         );
 
+      
+    
+        $reminderTime = Carbon::createFromFormat('Y-m-d H:i', "{$request->date} {$request->time}", 'Asia/Colombo');
         $currentTime = Carbon::now('Asia/Colombo');
+
         $minutesDifference = $currentTime->diffInMinutes($reminderTime, false);
 
-        // $scheduleTime = now()->addMinutes($minutesDifference);
-     $scheduleTime = $reminderTime->isFuture() ? $reminderTime : now();
-        //Mail::to(Auth::user()->email)
-        //    ->later($scheduleTime, new ReminderEmail($reminder));
+        $reminderTime = now()->addMinutes($minutesDifference);
 
 
-        SendReminderSms::dispatch("+94765536428", "Test SMS immediately");
-        // dd($scheduleTime);
-        // SendReminderSms::dispatch(
-        //     // Auth::user()->phone, // make sure you have phone column
-        //     "+94765536428", // hardcoded for testing
-        //     // "Reminder: " . $request->reminder
-        //     "Test SMS: "
-        // )->delay($scheduleTime);
+    
+        Mail::to(Auth::user()->email)
+            ->later($reminderTime, new ReminderEmail($reminder));
+
+
+                    
+                         $reminderTime2 = Carbon::createFromFormat(
+        'Y-m-d H:i',
+        "{$request->date} {$request->time}",
+        'Asia/Colombo'
+    );
+
+    $scheduleTime2 = $reminderTime2->isFuture() ? $reminderTime2 : now();
+
+    // dd($scheduleTime2);
+
+
+  $smsMessage = "Reminder From Mentra: " 
+    . $request->reminder 
+    . " on " 
+    . $request->date 
+    . " at " 
+    . $request->time;
+
+    SendReminderSms::dispatch(
+        "94713545642",
+        $smsMessage
+    )->delay($scheduleTime2);
 
         return redirect()->route('reminders.index')
             ->with('success', 'Reminder added successfully!');
     }
+
+
+
+
+//   public function store(Request $request)
+//     {
+//         $request->validate([
+//             'date' => 'required|date|after_or_equal:today',
+//             'time' => 'required',
+//             'reminder' => 'required|string|max:255'
+//         ]);
+
+//         $reminder = Reminder::create([
+//             'user_id' => Auth::id(),
+//             'date' => $request->date,
+//             'time' => $request->time,
+//             'reminder' => $request->reminder
+//         ]);
+
+
+
+//         $reminderTime = Carbon::createFromFormat('Y-m-d H:i', "{$request->date} {$request->time}", 'Asia/Colombo');
+//         $currentTime = Carbon::now('Asia/Colombo');
+
+//         $minutesDifference = $currentTime->diffInMinutes($reminderTime, false);
+
+//         $reminderTime = now()->addMinutes($minutesDifference);
+
+
+//         Mail::to(Auth::user()->email)
+//             ->later($reminderTime, new ReminderEmail($reminder));
+
+
+//         return redirect()->route('reminders.index')->with('success', 'Reminder added successfully!');
+//     }
 
 
 

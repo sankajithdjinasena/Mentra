@@ -112,6 +112,10 @@
                             <label class="form-label">Stress Level (1-10)</label>
                             <input type="number" name="stress_level" class="form-control" min="1" max="10" value="{{ $profile->stress_level ?? '' }}" required>
                         </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Daily Steps (hrs/day)</label>
+                            <input type="number" name="daily_steps" class="form-control" min="0" step="0.1" value="{{ $profile->daily_steps ?? '' }}" required>
+                        </div>
                     </div>
                     <button type="submit" class="btn-submit profile-btn mt-2">Update Profile</button>
                 </form>
