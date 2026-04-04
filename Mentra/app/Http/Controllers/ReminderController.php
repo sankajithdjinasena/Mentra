@@ -50,12 +50,12 @@ class ReminderController extends Controller
             'reminder' => 'required|string|max:255'
         ]);
 
-        // $reminder = Reminder::create([
-        //     'user_id' => Auth::id(),
-        //     'date' => $request->date,
-        //     'time' => $request->time,
-        //     'reminder' => $request->reminder
-        // ]);
+        $reminder = Reminder::create([
+            'user_id' => Auth::id(),
+            'date' => $request->date,
+            'time' => $request->time,
+            'reminder' => $request->reminder
+        ]);
 
         $reminderTime = Carbon::createFromFormat(
             'Y-m-d H:i',

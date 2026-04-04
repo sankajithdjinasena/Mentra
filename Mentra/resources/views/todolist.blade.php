@@ -96,46 +96,6 @@
             margin-bottom: 18px;
         }
 
-        .calendar-shell {
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-        }
-
-        .calendar-head {
-            background: var(--dark);
-            color: #fff;
-            padding: 12px 16px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .calendar-week,
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-        }
-
-        .calendar-week div {
-            background: #eef8ee;
-            text-align: center;
-            padding: 10px;
-            font-weight: 700;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .calendar-grid div {
-            height: 82px;
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: #fff;
-        }
-
-        .calendar-grid div:nth-child(7n) {
-            border-right: none;
-        }
 
         .stats-layout {
             display: grid;
@@ -261,10 +221,6 @@
                                     aria-label="Mark todo as done">
 
                                 <button type="button" class="action-pill primary" data-toggle-do>Start</button>
-<!-- 
-                                <button type="button" class="action-pill todo-pill" aria-label="Edit todo" title="Edit">
-                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.33H5v-.92l9.06-9.06.92.92-9.06 9.06zM20.71 7.04a1.004 1.004 0 0 0 0-1.42l-2.34-2.34a1.004 1.004 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"></path></svg>
-                                </button> -->
 
                                 <form class="todo-delete-form" action="{{ route('todolist.delete', $todo->id) }}" method="POST">
                                     @csrf
@@ -334,7 +290,7 @@
                         @csrf
                         <input type="hidden" name="date" value="{{ $date ?? now()->toDateString() }}">
                         <input type="text" name="todos[]" placeholder="Add a new to-do item" maxlength="255" required aria-label="New to-do item">
-                        <button type="submit" class="plus" aria-label="Add to-do">+</button>
+                        <button type="submit"  class="plus" aria-label="Add to-do">+</button>
                     </form>
                 </article>
             </div>
@@ -383,63 +339,6 @@
                     <input type="hidden" id="studyInfoDate" name="date" value="">
                     <input type="hidden" id="studyInfoHours" name="hours" value="">
                 </form>
-
-
-
-
-
-    <!-- <section class="wow fadeInDown">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Add To-Do List</h2>
-                <form action="{{ route('todolist.store') }}" method="POST">
-                    @csrf
-                    <label>Date:</label>
-                    <input type="date" name="date" required min="{{ now()->toDateString() }}"
-                        value="{{ $date }}">
-
-                    <label>To-Do Items:</label>
-                    <div id="todoItems">
-                        <input type="text" name="todos[]" required class="form-control">
-                    </div>
-                    <button type="button" onclick="addTodoItem()">+ Add More</button>
-                    <button type="button" onclick="removeTodoItem()">- Remove</button>
-                    <button type="submit">Save To-Do List</button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <h3>Today To-Do List</h3>
-                <form method="GET" action="{{ route('todolist.index') }}">
-                    <label>Filter by Date:</label>
-                    <input type="date" name="date" value="{{ $date }}" onchange="this.form.submit()">
-                    {{-- max="{{ now()->toDateString() }}" --}}
-                </form>
-                @foreach ($todolists as $todolist)
-                    <ul>
-                        @foreach ($todolist->listTodos as $todo)
-                            <li class="mt-3">
-                                <label>
-                                    <form action="{{ route('todolist.delete', $todo->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-danger"
-                                            style="background-color: #bc0a0a; margin-right: 20px;">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                    <input type="checkbox" class="mark-as-read large-checkbox" data-id="{{ $todo->id }}"
-                                        {{ $todo->active_status ? 'checked' : '' }} style="    margin-right: 20px;">
-                                    <span class="{{ $todo->active_status ? 'done' : '' }}">{{ $todo->todo }}</span>
-                                </label>
-
-
-                            </li>
-                        @endforeach
-                    </ul>
-                @endforeach
-            </div>
-        </div> -->
 
 
 
@@ -593,6 +492,26 @@
                 container.removeChild(inputs[inputs.length - 1]);
             }
         }
+
+        document.querySelectorAll('.todo-quick-add').forEach(function(form) {
+            form.addEventListener('submit', function() {
+                const formData = new FormData(form);
+                const payload = {};
+
+                for (const [key, value] of formData.entries()) {
+                    if (Object.prototype.hasOwnProperty.call(payload, key)) {
+                        if (!Array.isArray(payload[key])) {
+                            payload[key] = [payload[key]];
+                        }
+                        payload[key].push(value);
+                    } else {
+                        payload[key] = value;
+                    }
+                }
+
+                console.log('[To-Do Quick Add] Submitted form data:', payload);
+            });
+        });
     </script>
 
 
@@ -603,7 +522,9 @@
             checkbox.addEventListener('change', function() {
                 var todoId = this.getAttribute('data-id');
                 var isChecked = this.checked;
-                var listItem = this.closest('.todo-card').querySelector('.todo-main strong');
+                var card = this.closest('.todo-card');
+                var listItem = card.querySelector('.todo-main strong');
+                var completedAt = isChecked ? new Date().toISOString() : null;
 
                 fetch(`/todolist/${todoId}/markdone`, {
                         method: 'PUT',
@@ -612,7 +533,8 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         body: JSON.stringify({
-                            is_done: isChecked
+                            is_done: isChecked,
+                            completed_at: completedAt
                         })
                     })
                     .then(response => response.json())
@@ -621,6 +543,13 @@
                         if (data.success) {
                             if (isChecked) {
                                 listItem.classList.add('done');
+                                const state = card.__todoTimerState;
+                                const isPanelOpen = card.classList.contains('active');
+                                const isTimerRunning = state && state.running;
+
+                                if (isPanelOpen && isTimerRunning) {
+                                    closeCardPanel(card, 'toggle-pause');
+                                }
                             } else {
                                 listItem.classList.remove('done');
                             }
