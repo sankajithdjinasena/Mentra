@@ -4,7 +4,7 @@
         <h1 style="text-align:center;" class="mb-5">Mentra Admin Dashboard</h1>
 
         <div class="text-center mb-4">
-            <img src="{{ asset('img/logo-png - Copy.png') }}" alt="Mentra Logo" style="height: 165px;">
+            <img src="{{ asset('img/Mentra-bg.png') }}" alt="Mentra Logo" style="height: 165px;">
         </div>
 
         <div class="row">

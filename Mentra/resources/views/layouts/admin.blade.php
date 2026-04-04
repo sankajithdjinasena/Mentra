@@ -45,7 +45,7 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a title="Click to Visit Website" href="{{ route('/') }}" class="nav-link" target="_blank"
-                        style="padding: 0 17px;"><img style="width: 40px;" src="{{ asset('system/images/logo.jpg') }}"
+                        style="padding: 0 17px;"><img style="width: 40px;" src="{{ asset('img/Mentra-bg.png') }}"
                             alt="logo"></a>
                 </li>
             </ul>
@@ -192,7 +192,7 @@
                     <div class="offset-md-3 col-md-6 justify-content-md-center align-self-center mb-5 mb-md-0">
                         <span id="getYear">{{ date('Y') }}</span> &copy; &nbsp; &nbsp;
                         <a href="{{ route('/') }}" target="_blank">
-                            <img src="{{ asset('img/logo-png - Copy.png') }}" alt="Mentra Copyright"
+                            <img src="{{ asset('img/Mentra-bg.png') }}" alt="Mentra Copyright"
                                 style="height: 22px; vertical-align: middle;">
                         </a>
                         <span class="ms-2">&nbsp;&nbsp; &nbsp; All rights reserved.</span>
