@@ -47,17 +47,7 @@
             <button type="submit">Check Sleep</button>
         </div>
     </form>
-@else
-    <script>
-        Swal.fire({
-            icon: 'warning',
-            title: 'Profile Required',
-            text: 'Please complete your profile first!',
-            confirmButtonText: 'Go to Profile'
-        }).then(() => {
-            window.location.href = "{{ route('profile.edit') }}";
-        });
-    </script>
+
 @endif
 
 
